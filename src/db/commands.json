@@ -1,0 +1,26 @@
+{
+	"say":{
+		"action":"doSay",
+		"class":"Communication"
+	},
+	"inventory":{
+		"action":"doInventory",
+		"class":"Action"
+	},
+	"drop":{
+		"action":"doDrop",
+		"class":"Action"
+	},
+	"eq":{
+		"action":"doEquipment",
+		"class":"Action"
+	},
+	"create_object":{
+		"action":"createObject",
+		"class":"Wiz"
+	},
+	"edit_object":{
+		"action":"edit",
+		"class":"Object"
+	}
+}
