@@ -7,12 +7,13 @@ $(function() {
 	conn.onmessage = function(e) {
 		console.log();
 		$('#console').append(e.data);
+		 $('html, body').animate({scrollTop:$(document).height()});
 	};
 	
 	$('#input input').on('keypress', function (e) {
          if(e.which === 13){
-			conn.send($('#input input').val());
-			$('#input input').select()
+	    conn.send($('#input input').val());
+	    $('#input input').select()
 			
          }
    });

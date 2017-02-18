@@ -6,8 +6,11 @@ body {
 }
 div#input input {
     width: 100%;
-    padding: 10px;
     box-sizing: border-box;
     position: fixed;
     bottom: 0;
+    height: 35px;
+}
+pre#console {
+    padding-bottom: 50px;
 }

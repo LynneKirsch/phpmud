@@ -1,29 +1,35 @@
 <?php
 class Database extends GameInterface
 {
-	public $commands;
-	
-	function __construct()
-	{
-		$this->commands =  json_decode(file_get_contents('src/db/commands.json'));
-	}
-	
 	function getCommands()
 	{
-		return $this->commands;
+		return json_decode(file_get_contents('src/db/commands.json'));
 	}
 	
 	function getCommand($arg)
 	{
-		$commands = (array)$this->commands; 
+		$commands = (array)$this->getCommands(); 
+		$command_found = false;
+		
 		if(in_array($arg, array_keys($commands)))
 		{
 			return $commands[$arg];
 		}
 		else
 		{
-			return false;
+			foreach($commands as $key=>$command)
+			{
+				if(strpos($key, $arg)===0)
+				{
+					$command_found = true;
+					return $command;
+				}
+			}
+			
+			if(!$command_found)
+			{
+				return false;
+			}
 		}
-		
 	}
 }

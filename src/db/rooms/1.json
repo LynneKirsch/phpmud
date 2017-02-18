@@ -1,10 +1,10 @@
 {
     "id": 1,
-    "area_id": null,
+    "area_id": "1",
     "name": "The First Room",
     "description": "You stand in a nameless void.",
-    "north_to": null,
-    "south_to": null,
+    "north_to": "2",
+    "south_to": "3",
     "west_to": null,
     "east_to": null,
     "down_to": null,

@@ -31,13 +31,12 @@ class Server implements MessageComponentInterface
     }
 
     public function onMessage(ConnectionInterface $ch, $args) 
-    {
-		
+    {	
 		if($ch->CONN_STATE == "CONNECTED")
 		{
 			$ch->send("> " . $args . "\n");
-			$interpretor = new Interpret($ch, $args);
-			$interpretor->interpret();
+			$interpreter = new Interpreter($ch);
+			$interpreter->interpret($args);
 		}
 		else
 		{
@@ -69,7 +68,8 @@ class Server implements MessageComponentInterface
 		{
 			if($client->CONN_STATE == "CONNECTED")
 			{
-				
+				$update = new Update();
+				$update->doTick();
 			}
         }
     }

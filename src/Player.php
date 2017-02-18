@@ -18,6 +18,7 @@ class Player extends GameInterface
 		'intelligence' => 8,
 	);
 	public $attribute_points = 70;
+	public $title = "";
 	
 	function load($player_obj = null)
 	{
@@ -49,6 +50,11 @@ class Player extends GameInterface
 	
 	function save()
 	{
+		if(empty($this->name))
+		{
+			$this->load($this->ch->pData);
+		}
+		
 		$player_file = fopen("src/db/player/".strtolower($this->name).".json", "w");
 		fwrite($player_file, json_encode($this, JSON_PRETTY_PRINT));
 		fclose($player_file);

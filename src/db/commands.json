@@ -1,50 +1,72 @@
 {
 	"say":{
 		"action":"doSay",
-		"class":"Communication"
+		"class":"Communication",
+		"level":1
 	},
 	"inventory":{
 		"action":"doInventory",
-		"class":"Action"
+		"class":"Action",
+		"level":1
 	},
 	"drop":{
 		"action":"doDrop",
-		"class":"Action"
+		"class":"Action",
+		"level":1
 	},
 	"eq":{
 		"action":"doEquipment",
-		"class":"Action"
+		"class":"Action",
+		"level":1
 	},
 	"create_object":{
 		"action":"createObject",
-		"class":"Wiz"
+		"class":"Wiz",
+		"level":1
 	},
 	"edit_object":{
 		"action":"edit",
-		"class":"Object"
+		"class":"Object",
+		"level":1
 	},
 	"load_obj":{
 		"action":"loadObject",
-		"class":"Wiz"
+		"class":"Wiz",
+		"level":1
 	},
 	"pdump":{
 		"action":"pDump",
-		"class":"Wiz"
+		"class":"Wiz",
+		"level":1
 	},
 	"save":{
 		"action":"savePlayer",
-		"class":"Action"
+		"class":"Action",
+		"level":1
 	},
 	"create_room":{
 		"action":"createRoom",
-		"class":"Wiz"
+		"class":"Wiz",
+		"level":1
 	},
 	"edit_room":{
 		"action":"edit",
-		"class":"Room"
+		"class":"Room",
+		"level":1
 	},
 	"l":{
 		"action":"doLook",
-		"class":"Action"
+		"class":"Action",
+		"level":1
+	},
+	"cast":{
+		"action":"doCast",
+		"class":"Magic",
+		"level":1
+	},
+	"who":{
+		"action":"doWho",
+		"class":"Info",
+		"level":1
 	}
 }

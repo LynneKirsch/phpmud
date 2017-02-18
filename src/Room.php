@@ -86,7 +86,14 @@ class Room extends GameInterface
 			'exit',
 			'',
 			'name',
-			'description'
+			'description',
+			'north_to',
+			'south_to',
+			'west_to',
+			'east_to',
+			'up_to',
+			'down_to',
+			'area_id'
 		);
 		
 		if(in_array($command, $edit_commands))
@@ -100,8 +107,7 @@ class Room extends GameInterface
 			{
 				$this->showRoom();
 			}
-			elseif($command == "name"
-				|| $command == "description")
+			else
 			{
 				$this->{$command} = implode(' ', $arg_array);
 				$this->save();

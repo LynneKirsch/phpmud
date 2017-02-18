@@ -32,6 +32,7 @@ class Login extends GameInterface
 			{
 				$this->ch->pData = new Player();
 				$this->ch->pData->name = ucfirst($name);
+				$this->ch->pData->level = 1;
 				$this->INITIALIZE_CREATION();
 			}
 		}

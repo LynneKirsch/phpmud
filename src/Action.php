@@ -27,23 +27,41 @@ class Action extends GameInterface
 	
 	function doDrop($args)
 	{
+		if($args == "")
+		{
+			$this->ch->send("Drop what?\n");
+			return;
+		}
+		
 		$inventory = $this->ch->pData->inventory;
 		
 		foreach($inventory as $key=>$item)
 		{
-			if(in_array($args, explode(' ', $item->keywords)))
+			if($args == "all")
 			{
-				if($item->quantity > 1)
+				unset($this->ch->pData->inventory->{$key});
+				$this->ch->send("You drop " . $item->short);
+			}
+			else
+			{
+				if(in_array($args, explode(' ', $item->keywords)))
 				{
-					$item->quantity = $item->quantity - 1;
-				}
-				else
-				{
-					unset($this->ch->pData->inventory->{$key});
+					if(isset($item->quantity) && $item->quantity > 1)
+					{
+						$item->quantity = $item->quantity - 1;
+					}
+					else
+					{
+						unset($this->ch->pData->inventory->{$key});
+					}
+					
+					$this->ch->send("You drop " . $item->short);
+					return;
 				}
 			}
 		}
 	}
+	
 	function doLook()
 	{
 		$room = new Room($this->ch);
