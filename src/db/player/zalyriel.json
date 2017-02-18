@@ -1,0 +1,19 @@
+{
+    "name": "Zalyriel",
+    "level": null,
+    "race": null,
+    "class": null,
+    "equipment": {},
+    "inventory": [],
+    "attributes": {
+        "strength": 8,
+        "dexterity": 8,
+        "constitution": 8,
+        "wisdom": 8,
+        "charisma": 8,
+        "intelligence": 8
+    },
+    "attribute_points": 70,
+    "ch": null,
+    "password": "polkij"
+}
