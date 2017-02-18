@@ -40,9 +40,12 @@ class Wiz extends GameInterface
 	
 	function pDump()
 	{
+		ob_start();
 		echo '<pre>';
 		print_r($this->ch->pData);
 		echo '</pre>';
+		$output = ob_get_clean();
+		$this->ch->send($output);
 	}
 }
 

@@ -48,7 +48,7 @@ class Login extends GameInterface
 		$player_obj = json_decode(file_get_contents('src/db/player/'.strtolower($this->ch->TMP_NAME).'.json'));
 		$existing_pass = $player_obj->password;
 		
-		if($password == $existing_pass)
+		if(password_verify($password, $existing_pass))
 		{
 			$this->ch->CONN_STATE = "CONNECTED";
 			$player = new Player();
@@ -85,7 +85,7 @@ class Login extends GameInterface
 		}
 		elseif($arg_array[0] == 'password')
 		{
-			$this->ch->pData->password = $arg_array[1];
+			$this->ch->pData->password = password_hash($arg_array[1], PASSWORD_BCRYPT);
 			$this->ch->send("\nPassword set.");
 			$this->GET_CREATION_SUMMARY();
 		}
