@@ -1,4 +1,5 @@
 <?php
+require_once('Constants.php');
 require_once('GameInterface.php');
 require_once('Database.php');
 require_once('Interpret.php');

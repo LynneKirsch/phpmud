@@ -6,15 +6,23 @@ class Action extends GameInterface
 		$inventory = $this->ch->pData->inventory;
 		$this->ch->send("You are carrying: \n");
 		
-		foreach($inventory as $vnum => $item)
+		if(count($inventory)>0)
 		{
-			if($item->quantity > 1)
+			foreach($inventory as $id => $item)
 			{
-				$this->ch->send("($item->quantity) ");
+				if(isset($item->quantity) && $item->quantity > 1)
+				{
+					$this->ch->send("($item->quantity) ");
+				}
+
+				$this->ch->send($item->short . "\n");
 			}
-			
-			$this->ch->send($item->short_description . "\n");
 		}
+		else
+		{
+			$this->ch->send("Nothing.\n");
+		}
+		
 	}
 	
 	function doDrop($args)
@@ -36,9 +44,22 @@ class Action extends GameInterface
 			}
 		}
 	}
+	function doLook()
+	{
+		$room = new Room($this->ch);
+		$room->load($this->ch->pData->in_room);
+		$this->ch->send($room->name."\n");
+		$this->ch->send($room->description."\n");
+	}
 	
 	function doEquipment()
 	{
 
+	}
+	
+	function savePlayer()
+	{
+		$this->ch->pData->save();
+		$this->ch->send("Saved.\n");
 	}
 }

@@ -22,5 +22,29 @@
 	"edit_object":{
 		"action":"edit",
 		"class":"Object"
+	},
+	"load_obj":{
+		"action":"loadObject",
+		"class":"Wiz"
+	},
+	"pdump":{
+		"action":"pDump",
+		"class":"Wiz"
+	},
+	"save":{
+		"action":"savePlayer",
+		"class":"Action"
+	},
+	"create_room":{
+		"action":"createRoom",
+		"class":"Wiz"
+	},
+	"edit_room":{
+		"action":"edit",
+		"class":"Room"
+	},
+	"l":{
+		"action":"doLook",
+		"class":"Action"
 	}
 }

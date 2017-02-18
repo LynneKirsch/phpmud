@@ -1,5 +1,5 @@
 <?php
-const OBJ_DIR = "src/db/objects/";
+
 
 class Object extends GameInterface
 {
@@ -40,7 +40,6 @@ class Object extends GameInterface
 			{
 				$this->ch->send("You are now editing object #".$this->id);
 			}
-			
 		}
 	}
 	
@@ -62,7 +61,7 @@ class Object extends GameInterface
 			return;
 		}
 		
-		if(file_exists('src/db/objects/' . $args . '.json'))
+		if(file_exists(OBJ_DIR.$args.'.json'))
 		{
 			$this->ch->editing_object = $args;
 			$this->ch->send("You are now editing object #" . $args);

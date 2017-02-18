@@ -51,7 +51,9 @@ class Login extends GameInterface
 		if($password == $existing_pass)
 		{
 			$this->ch->CONN_STATE = "CONNECTED";
-			$this->ch->pData = new Player($player_obj);
+			$player = new Player();
+			$player->load($player_obj);
+			$this->ch->pData = $player;
 			$this->ch->send("\nConnected.\n");
 		}
 		else

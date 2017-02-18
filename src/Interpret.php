@@ -36,6 +36,11 @@ class Interpret extends GameInterface
 			$object = new Object($this->ch);
 			$object->parseEditCommand($this->argument);
 		}
+		elseif(!empty($this->ch->editing_room))
+		{
+			$room = new Room($this->ch);
+			$room->parseEditCommand($this->argument);
+		}
 		else
 		{
 			if($this->command)
