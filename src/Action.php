@@ -25,6 +25,49 @@ class Action extends GameInterface
 		
 	}
 	
+	function doGet($args)
+	{
+		if($args == "")
+		{
+			$this->ch->send("Get what?\n");
+			return;
+		}
+		
+		$room = new Room($this->ch);
+		$room->load();
+		
+		foreach($room->objects as $key=>$obj)
+		{
+			if($args == "all")
+			{
+				unset($room->objects->{$key});
+				$room->save();
+				
+				$this->ch->send("You get " . $obj->short);
+			}
+			else
+			{
+				if(in_array($args, explode(' ', $obj->keywords)))
+				{
+					if(isset($obj->quantity) && $obj->quantity > 1)
+					{
+						$obj->quantity = $obj->quantity - 1;
+					}
+					else
+					{
+						unset($room->objects->{$key});
+						$room->save();
+					}
+					
+					$this->objToChar($obj);
+					$this->ch->send("You get " . $obj->short);
+					return;
+				}
+			}
+		}
+		
+	}
+	
 	function doDrop($args)
 	{
 		if($args == "")
@@ -55,6 +98,10 @@ class Action extends GameInterface
 						unset($this->ch->pData->inventory->{$key});
 					}
 					
+					$room = new Room($this->ch);
+					$room->load();
+					
+					$this->objToRoom($item, $room);
 					$this->ch->send("You drop " . $item->short);
 					return;
 				}
@@ -68,6 +115,14 @@ class Action extends GameInterface
 		$room->load($this->ch->pData->in_room);
 		$this->ch->send($room->name."\n");
 		$this->ch->send($room->description."\n");
+		
+		if(!empty($room->objects))
+		{
+			foreach($room->objects as $object)
+			{
+				$this->ch->send($object->long);
+			}
+		}
 	}
 	
 	function doEquipment()

@@ -1,6 +1,6 @@
 {
     "id": 1,
-    "area_id": "1",
+    "area_id": 1,
     "name": "The First Room",
     "description": "You stand in a nameless void.",
     "north_to": "2",
@@ -8,5 +8,14 @@
     "west_to": null,
     "east_to": null,
     "down_to": null,
-    "up_to": null
+    "up_to": null,
+    "objects": {
+        "5": {
+            "id": 5,
+            "short": "a mysterious bottle",
+            "long": "A mysterious bottle glimmers in the light here.",
+            "keywords": "bottle mysterious"
+        }
+    },
+    "mobiles": {}
 }

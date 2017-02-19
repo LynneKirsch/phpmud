@@ -33,8 +33,24 @@ class GameInterface
 		}
 	}
 	
-	function objToRoom($obj)
+	function objToRoom($obj, $room)
 	{
+		if(in_array($obj->id, array_keys((array)$room->objects)))
+		{
+			if(isset($room->objects->{$obj->id}->quantity))
+			{
+				$room->objects->{$obj->id}->quantity++;
+			}
+			else
+			{
+				$room->objects->{$obj->id}->quantity = 2;
+			}
+		}
+		else
+		{
+			$room->objects->{$obj->id} = $obj;
+		}
 		
+		$room->save();
 	}
 }

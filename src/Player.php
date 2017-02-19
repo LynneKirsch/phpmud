@@ -19,6 +19,12 @@ class Player extends GameInterface
 	);
 	public $attribute_points = 70;
 	public $title = "";
+	public $max_hit = 100;
+	public $cur_hit = 100;
+	public $max_ma = 100;
+	public $cur_ma = 100;
+	public $max_mv = 100;
+	public $cur_mv = 100;
 	
 	function load($player_obj = null)
 	{

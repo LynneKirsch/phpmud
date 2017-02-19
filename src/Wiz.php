@@ -47,5 +47,18 @@ class Wiz extends GameInterface
 		$output = ob_get_clean();
 		$this->ch->send($output);
 	}
+	function rDump()
+	{
+		$room = new Room($this->ch);
+		$room->load();
+		
+		ob_start();
+		echo '<pre>';
+		print_r($room->dumpRoom());
+		echo '</pre>';
+		$output = ob_get_clean();
+		$this->ch->send($output);
+
+	}
 }
 

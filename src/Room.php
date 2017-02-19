@@ -11,6 +11,8 @@ class Room extends GameInterface
 	public $east_to;
 	public $down_to;
 	public $up_to;
+	public $objects;
+	public $mobiles;
 	
 	public function save()
 	{
@@ -46,13 +48,28 @@ class Room extends GameInterface
 		}
 	}
 	
-	public function load($id)
+	public function load($id = null)
 	{
+		if(is_null($id))
+		{
+			$id = $this->ch->pData->in_room;
+		}
+		
 		$room = json_decode(file_get_contents(ROOM_DIR.$id.'.json'));
 		
 		foreach($room as $property => $value)
 		{
 			$this->{$property} = $value;
+		}
+		
+		if(empty($this->objects))
+		{
+			$this->objects = new stdClass();
+		}
+		
+		if(empty($this->mobiles))
+		{
+			$this->mobiles = new stdClass();
 		}
 	}
 	
@@ -132,14 +149,26 @@ class Room extends GameInterface
 	
 	public function showRoom()
 	{
+		$this->ch->send("ID: " . $this->id . "\n");
+		$this->ch->send("Area ID: " . $this->area_id . "\n");
+		$this->ch->send("Name: " . $this->name . "\n");
+		$this->ch->send("Description: " . $this->description . "\n");
+		$this->ch->send("Description: " . $this->description . "\n");
+	}
+	
+	public function dumpRoom()
+	{
 		$ref_room = new ReflectionClass($this);
-
+		$room = new stdClass();
+		
 		foreach($ref_room->getProperties() as $property)
 		{
 			if($property->class == $ref_room->name)
 			{
-				$this->ch->send($property->name.": ".$property->getValue($this)."\n");
+				$room->{$property->name} = $property->getValue($this);
 			}
 		}
+		
+		return $room;
 	}
 }

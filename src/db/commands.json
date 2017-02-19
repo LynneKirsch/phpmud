@@ -54,6 +54,11 @@
 		"class":"Room",
 		"level":1
 	},
+	"rdump":{
+		"action":"rDump",
+		"class":"Wiz",
+		"level":1
+	},
 	"l":{
 		"action":"doLook",
 		"class":"Action",
@@ -62,6 +67,11 @@
 	"cast":{
 		"action":"doCast",
 		"class":"Magic",
+		"level":1
+	},
+	"get":{
+		"action":"doGet",
+		"class":"Action",
 		"level":1
 	},
 	"who":{
