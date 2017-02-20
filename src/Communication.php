@@ -6,13 +6,13 @@ class Communication extends GameInterface
 	{
 		global $clients;
 		
-		$this->ch->send("\nYou say '" . $args . "'\n");
+		$this->toChar($this->ch, "You say '`k" . $args . "``'");
 		
 		foreach($clients as $client)
 		{
 			if($client != $this->ch)
 			{
-				$client->send($this->ch->pData->name . " says '" . $args . "'\n");
+				$this->toChar($client, $this->ch->pData->name . " says '`k" . $args . "``'");
 			}
 		}
 	}

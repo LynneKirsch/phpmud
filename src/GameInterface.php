@@ -89,4 +89,41 @@ class GameInterface
 
 		$room->save();
 	}
+	
+	function toChar($ch, $msg)
+	{
+		$ch->send($this->colorize($msg)."\n");
+	}
+	
+	function colorize($msg)
+    {
+		$msg = $msg;
+
+		$colors = array(
+			'`6' => '#000000',
+			'`a' => '#808080',
+			'`b' => '#800000',
+			'`c' => '#008000',
+			'`d' => '#808000',
+			'`e' => '#000080',
+			'`f' => '#800080',
+			'`g' => '#008080',
+			'`h' => '#c0c0c0',
+			'`i' => '#ff0000',
+			'`j' => '#00ff00',
+			'`k' => '#ffff00',
+			'`l' => '#0000ff',
+			'`m' => '#ff00ff',
+			'`n' => '#00ffff',
+			'`o' => '#ffffff',
+		);
+
+		foreach($colors as $key => $color)
+		{
+			$msg = str_replace($key, '<span style="color: ' . $color . '">', $msg);
+		}
+
+		$msg = str_replace('``', '<span style="color: #eeeeee;">', $msg);
+		return $msg;
+    }
 }

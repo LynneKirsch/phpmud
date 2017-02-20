@@ -12,6 +12,8 @@ class Wiz extends GameInterface
 	
 	function loadObject($args)
 	{
+		global $clients;
+		
 		if(!is_numeric($args) || count(explode(' ', $args))>1)
 		{
 			$this->ch->send("Syntax: load_obj [object_id]");
@@ -21,7 +23,16 @@ class Wiz extends GameInterface
 		if(file_exists(OBJ_DIR.$args.".json"))
 		{
 			$object = json_decode(file_get_contents(OBJ_DIR.$args.'.json'));
-			$this->objToChar($object);
+			$this->objToChar($object, $this->ch);
+			$this->ch->send("You have created " . $object->short . "!\n");
+			
+			foreach($clients as $client)
+			{
+				if($client != $this->ch && $client->pData->in_room == $this->ch->pData->in_room)
+				{
+					$client->send($this->ch->pData->name . " creates " . $object->short . "!\n");
+				}
+			}
 		}
 		else
 		{

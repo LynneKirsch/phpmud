@@ -65,7 +65,15 @@
             "lock_difficulty": null
         }
     },
-    "objects": {},
+    "objects": {
+        "4": {
+            "id": 4,
+            "short": "a beautiful `bred`` rose",
+            "long": "A beautiful `brose`` is worn by the ages.",
+            "keywords": "rose beautiful",
+            "ch": null
+        }
+    },
     "mobiles": {},
     "resets": {
         "objects": {

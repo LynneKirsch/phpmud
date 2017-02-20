@@ -4,7 +4,7 @@ class Action extends GameInterface
 	function doInventory()
 	{
 		$inventory = $this->ch->pData->inventory;
-		$this->ch->send("You are carrying: \n");
+		$this->toChar($this->ch, "You are carrying:");
 		
 		if(count($inventory)>0)
 		{
@@ -15,18 +15,20 @@ class Action extends GameInterface
 					$this->ch->send("($item->quantity) ");
 				}
 
-				$this->ch->send($item->short . "\n");
+				$this->toChar($this->ch, $item->short);
 			}
 		}
 		else
 		{
-			$this->ch->send("Nothing.\n");
+			$this->toChar($this->ch, "Nothing.");
 		}
 		
 	}
 	
 	function doGet($args)
 	{
+		global $clients; 
+		
 		if($args == "")
 		{
 			$this->ch->send("Get what?\n");
@@ -46,30 +48,54 @@ class Action extends GameInterface
 					
 					for($i=1;$i<=$quantity;$i++)
 					{
+						foreach($clients as $client)
+						{
+							if($client != $this->ch && $client->pData->in_room == $this->ch->pData->in_room)
+							{
+								$this->toChar($client, $this->ch->pData->name . " gets " . $obj->short);
+							}
+						}
+					
 						$this->objFromRoom($obj, $room);
 						$this->objToChar($obj, $this->ch);
-						$this->ch->send("You get " . $obj->short."\n");
+						$this->toChar($this->ch, "You get " . $obj->short);
 					}
 				}
 				else
 				{
+					foreach($clients as $client)
+					{
+						if($client != $this->ch && $client->pData->in_room == $this->ch->pData->in_room)
+						{
+							$this->toChar($client, $this->ch->pData->name . " gets " . $obj->short);
+						}
+					}
+					
 					$this->objFromRoom($obj, $room);
 					$this->objToChar($obj, $this->ch);
-					$this->ch->send("You get " . $obj->short."\n");
+					$this->toChar($this->ch, "You get " . $obj->short);
 				}
 			}
 			else
 			{
 				if(in_array($args, explode(' ', $obj->keywords)))
 				{
+					foreach($clients as $client)
+					{
+						if($client != $this->ch && $client->pData->in_room == $this->ch->pData->in_room)
+						{
+							$this->toChar($client, $this->ch->pData->name . " gets " . $obj->short);
+						}
+					}
+					
 					$this->objFromRoom($obj, $room);
 					$this->objToChar($obj, $this->ch);
-					$this->ch->send("You get " . $obj->short ."\n");
+					$this->toChar($this->ch, "You get " . $obj->short);
 					break;
 				}
 				else
 				{
-					$this->ch->send("You don't see that here.\n");
+					$this->toChar($this->ch, "You don't see that here.");
 				}
 			}
 		}	
@@ -77,6 +103,8 @@ class Action extends GameInterface
 	
 	function doDrop($args)
 	{
+		global $clients;
+		
 		if($args == "")
 		{
 			$this->ch->send("Drop what?\n");
@@ -96,14 +124,30 @@ class Action extends GameInterface
 					
 					for($i=1;$i<=$quantity;$i++)
 					{
+						foreach($clients as $client)
+						{
+							if($client != $this->ch && $client->pData->in_room == $this->ch->pData->in_room)
+							{
+								$this->toChar($client, $this->ch->pData->name . " drops " . $item->short);
+							}
+						}
+						
+						$this->toChar($this->ch, "You drop " . $item->short);
 						$this->objFromChar($item, $this->ch);
-						$this->ch->send("You drop " . $item->short."\n");
 						$this->objToRoom($item, $room);
 					}
 				}
 				else
 				{
-					$this->ch->send("You drop " . $item->short."\n");
+					foreach($clients as $client)
+					{
+						if($client != $this->ch && $client->pData->in_room == $this->ch->pData->in_room)
+						{
+							$this->toChar($client, $this->ch->pData->name . " drops " . $item->short);
+						}
+					}
+						
+					$this->toChar($this->ch, "You drop " . $item->short);
 					$this->objFromChar($item, $this->ch);
 					$this->objToRoom($item, $room);
 				}
@@ -112,9 +156,17 @@ class Action extends GameInterface
 			{
 				if(in_array($args, explode(' ', $item->keywords)))
 				{
+					foreach($clients as $client)
+					{
+						if($client != $this->ch && $client->pData->in_room == $this->ch->pData->in_room)
+						{
+							$this->toChar($client, $this->ch->pData->name . " drops " . $item->short);
+						}
+					}
+						
 					$this->objFromChar($item, $this->ch);
 					$this->objToRoom($item, $room);
-					$this->ch->send("You drop " . $item->short);
+					$this->toChar($this->ch, "You drop " . $item->short);
 					break;
 				}
 			}
@@ -123,6 +175,7 @@ class Action extends GameInterface
 	
 	function doLook()
 	{
+		global $clients;
 		$room = new Room($this->ch);
 		$room->load($this->ch->pData->in_room);
 		$this->ch->send($room->name."\n");
@@ -169,7 +222,15 @@ class Action extends GameInterface
 					$this->ch->send("($object->quantity) ");
 				}
 				
-				$this->ch->send($object->long);
+				$this->toChar($this->ch, $object->long);
+			}
+		}
+		
+		foreach($clients as $client)
+		{
+			if($client->pData->in_room == $this->ch->pData->in_room)
+			{
+				$this->toChar($this->ch, $client->pData->name." is here.");
 			}
 		}
 	}
