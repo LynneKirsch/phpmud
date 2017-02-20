@@ -1,5 +1,5 @@
 $(function() {
-	var conn = new WebSocket('ws://custom-bhnt.frb.io:9000');
+	var conn = new WebSocket('ws://172.16.1.1:9000');
 	conn.onopen = function(e) {
 		console.log("Connection established!");
 	};
