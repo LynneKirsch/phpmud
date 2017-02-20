@@ -5,18 +5,13 @@ class Room extends GameInterface
 	public $area_id;
 	public $name;
 	public $description;
-	public $north_to;
-	public $south_to;
-	public $west_to;
-	public $east_to;
-	public $down_to;
-	public $up_to;
+	public $exits;
 	public $objects;
 	public $mobiles;
+	public $resets;
 	
 	public function save()
 	{
-		$new_room = false;
 		
 		if(!empty($this->id))
 		{
@@ -31,20 +26,9 @@ class Room extends GameInterface
 				}
 			}
 			
-			if(!file_exists(ROOM_DIR.$this->id.".json"))
-			{
-				$new_room = true;
-			}
-			
 			$room_file = fopen(ROOM_DIR.$room->id.".json", "w");
 			fwrite($room_file, json_encode($room, JSON_PRETTY_PRINT));
 			fclose($room_file);
-			
-			if($new_room)
-			{
-				$this->ch->editing_room = $this->id;
-				$this->ch->send("You are now editing room #".$this->id);
-			}
 		}
 	}
 	
@@ -71,89 +55,24 @@ class Room extends GameInterface
 		{
 			$this->mobiles = new stdClass();
 		}
-	}
-	
-	public function edit($args)
-	{
-		if(count(explode(' ', $args))>1 || !is_numeric($args))
-		{
-			$this->ch->send("\nSyntax: edit_room [ID]");
-			return;
-		}
 		
-		if(file_exists(ROOM_DIR.$args.'.json'))
+		if(empty($this->resets))
 		{
-			$this->ch->editing_room = $args;
-			$this->ch->send("You are now editing room #" . $args);
+			$this->resets = new stdClass();
 		}
-		else
+
+		if(empty($this->exits))
 		{
-			$this->ch->send("No such room found.");
+			$exit_obj = new stdClass();
+			$exit_obj->to_room = null;
+			$exit_obj->is_door = null;
+			$exit_obj->door_name = null;
+			$exit_obj->is_closed = null;
+			$exit_obj->cur_closed = null;
+			$exit_obj->is_locked = null;
+			$exit_obj->cur_locked = null;
+			$exit_obj->lock_difficulty = null;
 		}
-	}
-	
-	public function parseEditCommand($args)
-	{
-		$this->load($this->ch->editing_room);
-		
-		$arg_array = explode(' ', $args);
-		$command = array_shift($arg_array);
-		
-		$edit_commands = array(
-			'exit',
-			'',
-			'name',
-			'description',
-			'north_to',
-			'south_to',
-			'west_to',
-			'east_to',
-			'up_to',
-			'down_to',
-			'area_id'
-		);
-		
-		if(in_array($command, $edit_commands))
-		{
-			if($command == "exit")
-			{
-				unset($this->ch->editing_room);
-				$this->ch->send("Exiting room edit.");
-			}
-			elseif($command == "")
-			{
-				$this->showRoom();
-			}
-			else
-			{
-				$this->{$command} = implode(' ', $arg_array);
-				$this->save();
-				$this->showRoom();
-			}
-		}
-		else
-		{
-			$this->ch->send("Invalid edit commands. Command list: \n");
-			
-			foreach($edit_commands as $edit_command)
-			{
-				if($edit_command != "")
-				{
-					$this->ch->send($edit_command . "\n");
-				}
-			}
-			
-			$this->ch->send("Or enter to view room.\n");
-		}
-	}
-	
-	public function showRoom()
-	{
-		$this->ch->send("ID: " . $this->id . "\n");
-		$this->ch->send("Area ID: " . $this->area_id . "\n");
-		$this->ch->send("Name: " . $this->name . "\n");
-		$this->ch->send("Description: " . $this->description . "\n");
-		$this->ch->send("Description: " . $this->description . "\n");
 	}
 	
 	public function dumpRoom()

@@ -37,21 +37,17 @@ class Player extends GameInterface
 					$this->{$key} = $val;
 				}
 			}
-			
-			if(empty($this->inventory))
-			{
-				$this->inventory = new stdClass();
-			}
-			if(empty($this->equipment))
-			{
-				$this->equipment = new stdClass();
-			}
 		}
-		else
+		
+		if(empty($this->inventory))
 		{
-			$this->equipment = new stdClass();
 			$this->inventory = new stdClass();
 		}
+		if(empty($this->equipment))
+		{
+			$this->equipment = new stdClass();
+		}
+		
 	}
 	
 	function save()

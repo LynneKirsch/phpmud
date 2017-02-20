@@ -1,4 +1,3 @@
-<br>
 <div class="container">
 	<div class="row">
 		<div class="col l12">
@@ -6,49 +5,108 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col l12">
-			  <div class="row">
-    <form class="col s12">
-      <div class="row">
-        <div class="input-field col s6">
-			<input id="room_name" type="text" class="validate" value="<?php echo $room->name; ?>">
-          <label for="room_name">Room Name</label>
-        </div>
-        <div class="input-field col s6">
-          <input id="last_name" type="text" class="validate">
-          <label for="last_name">Last Name</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <textarea id="textarea1" class="materialize-textarea"></textarea>
-          <label for="textarea1">Textarea</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="password" type="password" class="validate">
-          <label for="password">Password</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="email" type="email" class="validate">
-          <label for="email">Email</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s12">
-          This is an inline input field:
-          <div class="input-field inline">
-            <input id="email" type="email" class="validate">
-            <label for="email" data-error="wrong" data-success="right">Email</label>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-        
+		<div class="col l3">
+			Room Name: 
+			<input type="text" value="<?php echo $room->name; ?>">
+		</div>
+		<div class="col l3">
+			Room Area: 
+			<input type="text" value="<?php echo $room->area->name; ?>">
 		</div>
 	</div>
+	<div class="row">
+		<div class="col l12">
+			Room Description: 
+			<textarea style="height: 200px"><?php echo $room->description; ?></textarea>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col l2">
+			North 
+			<input type="text" value="<?php echo $room->north_to; ?>">
+		</div>
+		<div class="col l2">
+			South 
+			<input type="text" value="<?php echo $room->south_to; ?>">
+		</div>
+		<div class="col l2">
+			East 
+			<input type="text" value="<?php echo $room->east_to; ?>">
+		</div>
+		<div class="col l2">
+			West 
+			<input type="text" value="<?php echo $room->west_to; ?>">
+		</div>
+		<div class="col l2">
+			Up 
+			<input type="text" value="<?php echo $room->up_to; ?>">
+		</div>
+		<div class="col l2">
+			Down 
+			<input type="text" value="<?php echo $room->down_to; ?>">
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col l8">
+			<h4>Doors <a class="waves-effect waves-light btn"><i class="material-icons">add</i></a></h4> 
+			
+		</div>
+	</div>
+	<div class="row">
+		<div class="col l2">
+			Exit 
+			<input type="text" value="">
+		</div>
+		<div class="col l2">
+			Name 
+			<input type="text" value="">
+		</div>
+		<div class="col l2">
+			Locked 
+			<input type="text" value="">
+		</div>
+		<div class="col l2">
+			Lock Difficulty (1 - 5)
+			<input type="text" value="">
+		</div>
+	</div>
+	
+	
+	<div class="row">
+		<div class="col l8">
+			<h4>Mobiles <a class="waves-effect waves-light btn"><i class="material-icons">add</i></a></h4> 
+		</div>
+	</div>
+	<div class="row">
+		<div class="col l2">
+			ID 
+			<input type="text" value="">
+		</div>
+		<div class="col l2">
+			Quantity 
+			<input type="text" value="">
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col l8">
+			<h4>Objects <a class="waves-effect waves-light btn"><i class="material-icons">add</i></a></h4> 
+		</div>
+	</div>
+	<div class="row">
+		<div class="col l2">
+			ID 
+			<input type="text" value="">
+		</div>
+		<div class="col l2">
+			Quantity 
+			<input type="text" value="">
+		</div>
+		<div class="col l2">
+			Where 
+			<input type="text" value="">
+		</div>
+	</div>
+
 </div>

@@ -3,19 +3,85 @@
     "area_id": 1,
     "name": "The First Room",
     "description": "You stand in a nameless void.",
-    "north_to": "2",
-    "south_to": "3",
-    "west_to": null,
-    "east_to": null,
-    "down_to": null,
-    "up_to": null,
-    "objects": {
-        "5": {
-            "id": 5,
-            "short": "a mysterious bottle",
-            "long": "A mysterious bottle glimmers in the light here.",
-            "keywords": "bottle mysterious"
+    "exits": {
+        "north": {
+            "to_room": 2,
+            "is_door": true,
+            "door_name": "door",
+            "is_closed": true,
+            "cur_closed": true,
+            "is_locked": true,
+            "cur_locked": true,
+            "lock_difficulty": 1
+        },
+        "south": {
+            "to_room": 3,
+            "is_door": false,
+            "door_name": null,
+            "is_closed": null,
+            "cur_closed": null,
+            "is_locked": null,
+            "cur_locked": null,
+            "lock_difficulty": null
+        },
+        "west": {
+            "to_room": null,
+            "is_door": false,
+            "door_name": null,
+            "is_closed": null,
+            "cur_closed": null,
+            "is_locked": null,
+            "cur_locked": null,
+            "lock_difficulty": null
+        },
+        "east": {
+            "to_room": null,
+            "is_door": false,
+            "door_name": null,
+            "is_closed": null,
+            "cur_closed": null,
+            "is_locked": null,
+            "cur_locked": null,
+            "lock_difficulty": null
+        },
+        "down": {
+            "to_room": null,
+            "is_door": false,
+            "door_name": null,
+            "is_closed": null,
+            "cur_closed": null,
+            "is_locked": null,
+            "cur_locked": null,
+            "lock_difficulty": null
+        },
+        "up": {
+            "to_room": null,
+            "is_door": false,
+            "door_name": null,
+            "is_closed": null,
+            "cur_closed": null,
+            "is_locked": null,
+            "cur_locked": null,
+            "lock_difficulty": null
         }
     },
-    "mobiles": {}
+    "objects": {},
+    "mobiles": {},
+    "resets": {
+        "objects": {
+            "5": {
+                "id": 5,
+                "quantity": 1,
+                "where": {
+                    "in_room": 1
+                }
+            }
+        },
+        "mobiles": {
+            "1": {
+                "id": 1,
+                "quantity": 1
+            }
+        }
+    }
 }
