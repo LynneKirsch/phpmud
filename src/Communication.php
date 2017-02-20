@@ -12,7 +12,7 @@ class Communication extends GameInterface
 		{
 			if($client != $this->ch)
 			{
-				$client->send($this->ch->pData->name . "says '" . $args . "'\n");
+				$client->send($this->ch->pData->name . " says '" . $args . "'\n");
 			}
 		}
 	}

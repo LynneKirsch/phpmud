@@ -1,5 +1,5 @@
 $(function() {
-	var conn = new WebSocket('ws://174.138.76.27:9000');
+	var conn = new WebSocket('ws://localhost:9000');
 	conn.onopen = function(e) {
 		console.log("Connection established!");
 	};
