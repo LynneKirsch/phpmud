@@ -2,5 +2,6 @@
     "id": 4,
     "short": "a beautiful `bred`` rose",
     "long": "A beautiful `brose`` is worn by the ages.",
-    "keywords": "rose beautiful"
+    "keywords": "rose beautiful",
+	"wear_flags":"head take"
 }

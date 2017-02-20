@@ -13,6 +13,7 @@ require_once('Object.php');
 require_once('Area.php');
 require_once('Room.php');
 require_once('Mobile.php');
+require_once('Equipment.php');
 require_once('Login.php');
 require_once('Update.php');
 

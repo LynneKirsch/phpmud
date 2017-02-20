@@ -139,6 +139,16 @@
 		"class":"Communication",
 		"level":1
 	},
+	"purge":{
+		"action":"doPurge",
+		"class":"Wiz",
+		"level":1
+	},
+	"wear":{
+		"action":"doWear",
+		"class":"Action",
+		"level":1
+	},
 	"who":{
 		"action":"doWho",
 		"class":"Info",

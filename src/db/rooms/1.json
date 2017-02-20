@@ -65,23 +65,55 @@
             "lock_difficulty": null
         }
     },
-    "objects": {
-        "5": {
-            "id": 5,
-            "short": "a mysterious bottle",
-            "long": "A mysterious bottle glimmers in the light here.",
-            "keywords": "bottle mysterious",
-            "ch": null
-        }
-    },
+    "objects": {},
     "mobiles": [
         {
-            "id": null,
-            "short": null,
-            "long": null,
-            "keywords": null,
-            "max_hit": null,
-            "cur_hit": null
+            "id": 1,
+            "short": "a commoner",
+            "long": "A commoner stands here, begging for change.",
+            "keywords": "commoner man",
+            "max_hit": 50,
+            "cur_hit": 50
+        },
+        {
+            "id": 1,
+            "short": "a commoner",
+            "long": "A commoner stands here, begging for change.",
+            "keywords": "commoner man",
+            "max_hit": 50,
+            "cur_hit": 50
+        },
+        {
+            "id": 1,
+            "short": "a commoner",
+            "long": "A commoner stands here, begging for change.",
+            "keywords": "commoner man",
+            "max_hit": 50,
+            "cur_hit": 50
+        },
+        {
+            "id": 1,
+            "short": "a commoner",
+            "long": "A commoner stands here, begging for change.",
+            "keywords": "commoner man",
+            "max_hit": 50,
+            "cur_hit": 50
+        },
+        {
+            "id": 1,
+            "short": "a commoner",
+            "long": "A commoner stands here, begging for change.",
+            "keywords": "commoner man",
+            "max_hit": 50,
+            "cur_hit": 50
+        },
+        {
+            "id": 1,
+            "short": "a commoner",
+            "long": "A commoner stands here, begging for change.",
+            "keywords": "commoner man",
+            "max_hit": 50,
+            "cur_hit": 50
         },
         {
             "id": 1,

@@ -7,6 +7,7 @@ class Object extends GameInterface
 	public $short;
 	public $long;
 	public $keywords;
+	public $wear_flags;
 	
 	public function save()
 	{

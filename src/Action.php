@@ -71,22 +71,29 @@ class Action extends GameInterface
 	
 	function getAction($obj)
 	{
-		global $clients; 
-		
-		$room = new Room($this->ch);
-		$room->load();
-		
-		foreach($clients as $client)
+		if(in_array('take', explode(' ', $obj->wear_flags)))
 		{
-			if($client != $this->ch && $client->pData->in_room == $this->ch->pData->in_room)
-			{
-				$this->toChar($client, $this->ch->pData->name . " gets " . $obj->short);
-			}
-		}
+			global $clients; 
 
-		$this->objFromRoom($obj, $room);
-		$this->objToChar($obj, $this->ch);
-		$this->toChar($this->ch, "You get " . $obj->short);
+			$room = new Room($this->ch);
+			$room->load();
+
+			foreach($clients as $client)
+			{
+				if($client != $this->ch && $client->pData->in_room == $this->ch->pData->in_room)
+				{
+					$this->toChar($client, $this->ch->pData->name . " gets " . $obj->short);
+				}
+			}
+
+			$this->objFromRoom($obj, $room);
+			$this->objToChar($obj, $this->ch);
+			$this->toChar($this->ch, "You get " . $obj->short);
+		}
+		else
+		{
+			$this->toChar($this->ch, "You can't take that.");
+		}
 	}
 	
 	function doDrop($args)
@@ -231,12 +238,75 @@ class Action extends GameInterface
 	
 	function doEquipment()
 	{
-
+		$eq = new Equipment();
+		
+		foreach($this->ch->pData->equipment as $slot => $item)
+		{
+			$slot_val = is_null($item) ? 'nothing' : $item->short;
+			$slot_name = $eq->getDisplayName($slot);
+			
+			if($slot_name)
+			{
+				$this->toChar($this->ch, "[$slot_name] $slot_val");
+			}
+		}
+		
+		$this->doInventory();
 	}
 	
 	function savePlayer()
 	{
 		$this->ch->pData->save();
 		$this->ch->send("Saved.\n");
+	}
+	
+	function doWear($args)
+	{
+		if($args == "")
+		{
+			$this->ch->send("Wear what?\n");
+			return;
+		}
+		
+		foreach($this->player->inventory as $item)
+		{
+			if($args == "all")
+			{
+
+			}
+			else
+			{
+				if(in_array($args, explode(' ', $item->keywords)))
+				{
+					foreach(explode(' ', $item->wear_flags) as $wear_loc)
+					{
+						if($wear_lock != "" && $wear_loc != null)
+						{
+							$eq = new Equipment();
+							
+							if($eq->getDisplayName($wear_loc))
+							{
+								$this->player->inventory->{$wear_loc} = $item;
+							}
+							else
+							{
+								$this->toChar($this->ch, "You can't wear that.");
+							}
+						}
+						else
+						{
+							$this->toChar($this->ch, "You can't wear that.");
+						}
+					}
+					
+					$this->objFromChar($item, $this->ch);
+					break;
+				}
+				else
+				{
+					$this->toChar($this->ch, "You're not carrying that.");
+				}
+			}
+		}
 	}
 }

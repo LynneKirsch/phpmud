@@ -43,9 +43,10 @@ class Player extends GameInterface
 		{
 			$this->inventory = new stdClass();
 		}
+		
 		if(empty($this->equipment))
 		{
-			$this->equipment = new stdClass();
+			$this->equipment = new Equipment();
 		}
 		
 	}
