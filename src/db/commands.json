@@ -134,6 +134,11 @@
 		"class":"Move",
 		"level":1
 	},
+	"ooc":{
+		"action":"doOOC",
+		"class":"Communication",
+		"level":1
+	},
 	"who":{
 		"action":"doWho",
 		"class":"Info",

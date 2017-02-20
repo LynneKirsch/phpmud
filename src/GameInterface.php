@@ -103,7 +103,10 @@ class GameInterface
 	
 	function toChar($ch, $msg)
 	{
-		$ch->send($this->colorize($msg)."\n");
+		if($ch->CONN_STATE == "CONNECTED")
+		{
+			$ch->send($this->colorize($msg)."\n");
+		}
 	}
 	
 	function colorize($msg)

@@ -16,7 +16,7 @@ class Server implements MessageComponentInterface
 {   
     public function __construct(React\EventLoop\LoopInterface $loop) 
     {
-        $loop->addPeriodicTimer(10, function() 
+        $loop->addPeriodicTimer(45, function() 
         {
             $this->doTick();
         });

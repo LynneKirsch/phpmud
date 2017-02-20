@@ -40,6 +40,31 @@ class Wiz extends GameInterface
 		}	
 	}
 	
+	function doPurge()
+	{
+		$room = new Room($this->ch);
+		$room->load();
+		
+		if(count($room->objects)>0)
+		{
+			foreach($room->objects as $key=>$object)
+			{
+				unset($room->objects->{$key});
+			}
+		}
+		
+		if(count($room->mobiles)>0)
+		{
+			foreach($room->mobiles as $key=>$mobile)
+			{
+				unset($room->mobiles[$key]);
+			}
+		}
+		
+		$room->save();
+		$this->toChar($this->ch, "Room purged.");
+	}
+	
 	function createRoom()
 	{
 		$room_dir = new FilesystemIterator(ROOM_DIR, FilesystemIterator::SKIP_DOTS);
