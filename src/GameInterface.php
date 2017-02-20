@@ -7,6 +7,10 @@ class GameInterface
 	function __construct($ch = null)
 	{
 		$this->ch = $ch;
+		if(!is_null($ch))
+		{
+			$this->player = $this->ch->pData;
+		}
 	}
 	
 	function objFromChar($obj, $ch)
@@ -88,6 +92,13 @@ class GameInterface
 		}
 
 		$room->save();
+	}
+	
+	function charToRoom($ch, $room_id)
+	{
+		$ch->pData->in_room = $room_id;
+		$action = new Action($ch);
+		$action->doLook();
 	}
 	
 	function toChar($ch, $msg)

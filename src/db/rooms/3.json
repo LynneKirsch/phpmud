@@ -1,11 +1,11 @@
 {
-    "id": 1,
+    "id": 3,
     "area_id": 1,
-    "name": "The First Room",
+    "name": "The Third Room",
     "description": "You stand in a nameless void.",
     "exits": {
         "north": {
-            "to_room": null,
+            "to_room": 1,
             "is_door": false,
             "door_name": null,
             "is_closed": true,
@@ -15,7 +15,7 @@
             "lock_difficulty": 1
         },
         "south": {
-            "to_room": 3,
+            "to_room": null,
             "is_door": false,
             "door_name": null,
             "is_closed": null,
@@ -66,22 +66,23 @@
         }
     },
     "objects": {
-        "5": {
-            "id": 5,
-            "short": "a mysterious bottle",
-            "long": "A mysterious bottle glimmers in the light here.",
-            "keywords": "bottle mysterious",
-            "ch": null
+        "4": {
+            "id": 4,
+            "short": "a beautiful `bred`` rose",
+            "long": "A beautiful `brose`` is worn by the ages.",
+            "keywords": "rose beautiful",
+            "ch": null,
+            "quantity": 2
         }
     },
     "mobiles": [
         {
-            "id": null,
-            "short": null,
-            "long": null,
-            "keywords": null,
-            "max_hit": null,
-            "cur_hit": null
+            "id": 1,
+            "short": "a commoner",
+            "long": "A commoner stands here, begging for change.",
+            "keywords": "commoner man",
+            "max_hit": 50,
+            "cur_hit": 50
         },
         {
             "id": 1,
@@ -136,9 +137,8 @@
         },
         "mobiles": {
             "1": {
-                "quantity": 1,
-                "max_in_room": 1,
-                "max_in_area": 1
+                "id": 1,
+                "quantity": 1
             }
         }
     }

@@ -53,7 +53,7 @@ class Room extends GameInterface
 		
 		if(empty($this->mobiles))
 		{
-			$this->mobiles = new stdClass();
+			$this->mobiles = array();
 		}
 		
 		if(empty($this->resets))

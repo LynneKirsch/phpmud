@@ -16,7 +16,7 @@ class Server implements MessageComponentInterface
 {   
     public function __construct(React\EventLoop\LoopInterface $loop) 
     {
-        $loop->addPeriodicTimer(40, function() 
+        $loop->addPeriodicTimer(10, function() 
         {
             $this->doTick();
         });
@@ -62,16 +62,8 @@ class Server implements MessageComponentInterface
 
     public function doTick()
     {
-        global $clients;
-		
-        foreach ($clients as $client) 
-		{
-			if($client->CONN_STATE == "CONNECTED")
-			{
-				$update = new Update();
-				$update->doTick();
-			}
-        }
+        $update = new Update();
+		$update->doTick();
     }
 }
 

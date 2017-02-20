@@ -74,6 +74,66 @@
 		"class":"Action",
 		"level":1
 	},
+	"north":{
+		"action":"doNorth",
+		"class":"Move",
+		"level":1
+	},
+	"south":{
+		"action":"doSouth",
+		"class":"Move",
+		"level":1
+	},
+	"west":{
+		"action":"doWest",
+		"class":"Move",
+		"level":1
+	},
+	"east":{
+		"action":"doEast",
+		"class":"Move",
+		"level":1
+	},
+	"up":{
+		"action":"doUp",
+		"class":"Move",
+		"level":1
+	},
+	"down":{
+		"action":"doDown",
+		"class":"Move",
+		"level":1
+	},
+	"n":{
+		"action":"doNorth",
+		"class":"Move",
+		"level":1
+	},
+	"s":{
+		"action":"doSouth",
+		"class":"Move",
+		"level":1
+	},
+	"w":{
+		"action":"doWest",
+		"class":"Move",
+		"level":1
+	},
+	"e":{
+		"action":"doEast",
+		"class":"Move",
+		"level":1
+	},
+	"u":{
+		"action":"doUp",
+		"class":"Move",
+		"level":1
+	},
+	"d":{
+		"action":"doDown",
+		"class":"Move",
+		"level":1
+	},
 	"who":{
 		"action":"doWho",
 		"class":"Info",
