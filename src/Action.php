@@ -239,8 +239,14 @@ class Action extends GameInterface
 	function doEquipment()
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$equipment = parent::$ch->pData->equipment;
 		foreach($equipment as $slot => $item)
+=======
+		$eq = new Equipment();
+		
+		foreach($this->ch->pData->equipment as $slot => $item)
+>>>>>>> parent of 2a1ea82... wip
 =======
 		$eq = new Equipment();
 		
