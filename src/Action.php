@@ -3,36 +3,36 @@ class Action extends GameInterface
 {
 	function doInventory()
 	{
-		$inventory = $this->ch->pData->inventory;
-		$this->toChar($this->ch, "You are carrying:");
+		$inventory = parent::$ch->pData->inventory;
+		$this->toChar(parent::$ch, "You are carrying:");
 		
 		if(count($inventory)>0)
 		{
-			foreach($inventory as $id => $item)
+			foreach($inventory as $item)
 			{
 				if(isset($item->quantity) && $item->quantity > 1)
 				{
-					$this->ch->send("($item->quantity) ");
+					parent::$ch->send("($item->quantity) ");
 				}
 
-				$this->toChar($this->ch, $item->short);
+				$this->toChar(parent::$ch, $item->short);
 			}
 		}
 		else
 		{
-			$this->toChar($this->ch, "Nothing.");
+			$this->toChar(parent::$ch, "Nothing.");
 		}
 		
 	}
 	
 	function doGet($args)
 	{
-		$room = new Room($this->ch);
+		$room = new Room(parent::$ch);
 		$room->load();
 		
 		if($args == "")
 		{
-			$this->ch->send("Get what?\n");
+			$this->toChar(parent::$ch, "Get what?");
 			return;
 		}
 
@@ -63,7 +63,7 @@ class Action extends GameInterface
 				}
 				else
 				{
-					$this->toChar($this->ch, "You don't see that here.");
+					$this->toChar(parent::$ch, "You don't see that here.");
 				}
 			}
 		}	
@@ -75,24 +75,24 @@ class Action extends GameInterface
 		{
 			global $clients; 
 
-			$room = new Room($this->ch);
+			$room = new Room(parent::$ch);
 			$room->load();
 
 			foreach($clients as $client)
 			{
-				if($client != $this->ch && $client->pData->in_room == $this->ch->pData->in_room)
+				if($client != parent::$ch && $client->pData->in_room == parent::$ch->pData->in_room)
 				{
-					$this->toChar($client, $this->ch->pData->name . " gets " . $obj->short);
+					$this->toChar($client, parent::$ch->pData->name . " gets " . $obj->short);
 				}
 			}
 
 			$this->objFromRoom($obj, $room);
-			$this->objToChar($obj, $this->ch);
-			$this->toChar($this->ch, "You get " . $obj->short);
+			$this->objToChar($obj, parent::$ch);
+			$this->toChar(parent::$ch, "You get " . $obj->short);
 		}
 		else
 		{
-			$this->toChar($this->ch, "You can't take that.");
+			$this->toChar(parent::$ch, "You can't take that.");
 		}
 	}
 	
@@ -100,11 +100,11 @@ class Action extends GameInterface
 	{
 		if($args == "")
 		{
-			$this->ch->send("Drop what?\n");
+			$this->toChar(parent::$ch, "Drop what?");
 			return;
 		}
 		
-		foreach($this->player->inventory as $item)
+		foreach(parent::$ch->pData->inventory as $item)
 		{
 			if($args == "all")
 			{
@@ -137,32 +137,32 @@ class Action extends GameInterface
 	{
 		global $clients;
 		
-		$room = new Room($this->ch);
+		$room = new Room(parent::$ch);
 		$room->load();
 		
 		foreach($clients as $client)
 		{
-			if($client != $this->ch && $client->pData->in_room == $this->player->in_room)
+			if($client != parent::$ch && $client->pData->in_room == parent::$ch->pData->in_room)
 			{
-				$this->toChar($client, $this->player->name . " drops " . $item->short);
+				$this->toChar($client, parent::$ch->pData->name . " drops " . $item->short);
 			}
 		}
 
-		$this->objFromChar($item, $this->ch);
+		$this->objFromChar($item, parent::$ch);
 		$this->objToRoom($item, $room);
-		$this->toChar($this->ch, "You drop " . $item->short);
+		$this->toChar(parent::$ch, "You drop " . $item->short);
 	}
 	
 	function doLook()
 	{
 		global $clients;
-		$room = new Room($this->ch);
-		$room->load($this->ch->pData->in_room);
-		$this->ch->send($room->name."\n");
-		$this->ch->send($room->description."\n");
+		$room = new Room(parent::$ch);
+		$room->load(parent::$ch->pData->in_room);
+		parent::$ch->send($room->name."\n");
+		parent::$ch->send($room->description."\n");
 		
 		
-		$this->ch->send("[Exits: ");
+		parent::$ch->send("[Exits: ");
 		
 		$exits = 0;
 		foreach($room->exits as $exit_name=>$exit)
@@ -171,34 +171,34 @@ class Action extends GameInterface
 			{
 				if($exit->is_door && $exit->cur_closed)
 				{
-					$this->ch->send("{");
+					parent::$ch->send("{");
 				}
 				
-				$this->ch->send("$exit_name");
+				parent::$ch->send("$exit_name");
 				
 				if($exit->is_door && $exit->cur_closed)
 				{
-					$this->ch->send("}");
+					parent::$ch->send("}");
 				}
 				
-				$this->ch->send(" ");
+				parent::$ch->send(" ");
 				$exits++;
 			}
 		}
 		
 		if($exits == 0)
 		{
-			$this->ch->send("none");
+			parent::$ch->send("none");
 		}
 		
-		$this->ch->send("]\n");
+		parent::$ch->send("]\n");
 		
 		
 		if(!empty($room->mobiles))
 		{
 			foreach($room->mobiles as $mobile)
 			{
-				$this->toChar($this->ch, "`f".$mobile->long."``");
+				$this->toChar(parent::$ch, "`f".$mobile->long."``");
 			}
 		}
 		
@@ -208,37 +208,37 @@ class Action extends GameInterface
 			{
 				if(isset($object->quantity) && $object->quantity > 1)
 				{
-					$this->ch->send("($object->quantity) ");
+					parent::$ch->send("($object->quantity) ");
 				}
 				
-				$this->toChar($this->ch, $object->long);
+				$this->toChar(parent::$ch, $object->long);
 			}
 		}
 		
 		foreach($clients as $client)
 		{
-			if($client != $this->ch && $client->pData->in_room == $this->ch->pData->in_room)
+			if($client != parent::$ch && $client->pData->in_room == parent::$ch->pData->in_room)
 			{
-				$this->toChar($this->ch, $client->pData->name." is here.");
+				$this->toChar(parent::$ch, $client->pData->name." is here.");
 			}
 		}
 	}
 	
 	function doOpen($args)
 	{
-		$room = new Room($this->ch);
-		$room->load($this->ch->pData->in_room);
+		$room = new Room(parent::$ch);
+		$room->load(parent::$ch->pData->in_room);
 		
 		if(count(explode(' ', $args))>1)
 		{
-			$this->ch->send("Syntax: open [item/direction]");
+			parent::$ch->send("Syntax: open [item/direction]");
 			return;
 		}
 	}
 	
 	function doEquipment()
 	{
-		$equipment = $this->ch->pData->equipment;
+		$equipment = parent::$ch->pData->equipment;
 		foreach($equipment as $slot => $item)
 		{
 			$slot_val = is_null($item) ? 'nothing' : $item->short;
@@ -246,7 +246,7 @@ class Action extends GameInterface
 			
 			if($slot_name)
 			{
-				$this->toChar($this->ch, "[$slot_name] $slot_val");
+				$this->toChar(parent::$ch, "[$slot_name] $slot_val");
 			}
 		}
 		
@@ -255,19 +255,19 @@ class Action extends GameInterface
 	
 	function savePlayer()
 	{
-		$this->ch->pData->save();
-		$this->ch->send("Saved.\n");
+		parent::$ch->pData->save();
+		parent::$ch->send("Saved.\n");
 	}
 	
 	function doWear($args)
 	{
 		if($args == "")
 		{
-			$this->ch->send("Wear what?\n");
+			parent::$ch->send("Wear what?\n");
 			return;
 		}
 		
-		foreach($this->player->inventory as $item)
+		foreach(parent::$ch->pData->inventory as $item)
 		{
 			if($args == "all")
 			{
@@ -285,25 +285,25 @@ class Action extends GameInterface
 							
 							if($eq->getDisplayName($wear_loc))
 							{
-								$this->player->inventory->{$wear_loc} = $item;
+								parent::$ch->pData->inventory->{$wear_loc} = $item;
 							}
 							else
 							{
-								$this->toChar($this->ch, "You can't wear that.");
+								$this->toChar(parent::$ch, "You can't wear that.");
 							}
 						}
 						else
 						{
-							$this->toChar($this->ch, "You can't wear that.");
+							$this->toChar(parent::$ch, "You can't wear that.");
 						}
 					}
 					
-					$this->objFromChar($item, $this->ch);
+					$this->objFromChar($item, parent::$ch);
 					break;
 				}
 				else
 				{
-					$this->toChar($this->ch, "You're not carrying that.");
+					$this->toChar(parent::$ch, "You're not carrying that.");
 				}
 			}
 		}

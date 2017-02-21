@@ -28,20 +28,20 @@ class Move extends GameInterface
 	
 	function doMoveDir($dir)
 	{
-		$room = new Room($this->ch);
+		$room = new Room(parent::$ch);
 		$room->load();
 		
 		if(is_null($room->exits->{$dir}->to_room))
 		{
-			$this->toChar($this->ch, "Alas, you cannot go that way.");
+			$this->toChar(parent::$ch, "Alas, you cannot go that way.");
 		}
 		elseif($room->exits->{$dir}->is_door && $room->exits->{$dir}->cur_closed)
 		{
-			$this->toChar($this->ch, "The " . $room->exits->{$dir}->door_name . " is closed.");
+			$this->toChar(parent::$ch, "The " . $room->exits->{$dir}->door_name . " is closed.");
 		}
 		else
 		{
-			$this->charToRoom($this->ch, $room->exits->{$dir}->to_room);
+			$this->charToRoom(parent::$ch, $room->exits->{$dir}->to_room);
 		}
 	}
 }

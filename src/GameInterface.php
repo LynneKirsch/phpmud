@@ -2,15 +2,11 @@
 
 class GameInterface 
 {
-	public $ch;
+	static $ch;
 	
 	function __construct($ch = null)
 	{
-		$this->ch = $ch;
-		if(!is_null($ch))
-		{
-			$this->player = $this->ch->pData;
-		}
+		self::$ch = $ch;
 	}
 	
 	function objFromChar($obj, $ch)
@@ -111,8 +107,6 @@ class GameInterface
 	
 	function colorize($msg)
     {
-		$msg = $msg;
-
 		$colors = array(
 			'`6' => '#000000',
 			'`a' => '#808080',
@@ -134,10 +128,9 @@ class GameInterface
 
 		foreach($colors as $key => $color)
 		{
-			$msg = str_replace($key, '<span style="color: ' . $color . '">', $msg);
+			$buf = str_replace($key, '<span style="color: ' . $color . '">', $msg);
 		}
 
-		$msg = str_replace('``', '<span style="color: #eeeeee;">', $msg);
-		return $msg;
+		return str_replace('``', '<span style="color: #eeeeee;">', $buf);
     }
 }

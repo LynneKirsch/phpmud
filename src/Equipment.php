@@ -1,5 +1,5 @@
 <?php
-class Equipment
+class Equipment extends GameInterface
 {
 	public $light = null;
 	public $head = null;
@@ -22,15 +22,15 @@ class Equipment
 	{
 		if(!is_null($ch))
 		{
-			foreach($this as $key=>$val)
+			foreach($this->getFields() as $field)
 			{
-				if(isset($ch->equipment->{$key}))
+				if(isset($ch->equipment->{$field}))
 				{
-					$this->{$key} = $this->ch->equipment->{$key};
+					$this->{$field} = parent::$ch->equipment->{$field};
 				}
 				else
 				{
-					$this->{$key} = $val;
+					$this->{$field} = null;
 				}
 			}
 		}
@@ -66,5 +66,12 @@ class Equipment
 		}
 		
 	}
+	
+	public function getFields()
+    {   
+        $parent = parent::getParentFields();
+        $child = array_keys(get_class_vars($this));
+        return array_diff($child, $parent);
+    }
 			
 }

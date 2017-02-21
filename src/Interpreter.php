@@ -13,22 +13,22 @@ class Interpreter extends GameInterface
 
 		if($arg == "")
 		{
-			$this->ch->send("");
+			parent::$ch->send("");
 		}
 		else
 		{
 			$command_string = implode(' ', $arg_array);
 			$command = $DB_OBJ->getCommand($arg);
 
-			if($command && $command->level <= $this->ch->pData->level)
+			if($command && $command->level <= parent::$ch->pData->level)
 			{
 				$c_class = $command->class;
-				$class = new $c_class($this->ch);
+				$class = new $c_class(parent::$ch);
 				$class->{$command->action}($command_string);
 			}
 			else
 			{
-				$this->ch->send("Huh?\n");
+				parent::$ch->send("Huh?\n");
 			}
 		}
 
@@ -38,16 +38,16 @@ class Interpreter extends GameInterface
 	
 	function doPrompt()
 	{
-		$max_hit = $this->ch->pData->max_hit;
-		$cur_hit = $this->ch->pData->cur_hit;
-		$max_ma = $this->ch->pData->max_ma;
-		$cur_ma = $this->ch->pData->cur_ma;
-		$max_mv = $this->ch->pData->max_mv;
-		$cur_mv = $this->ch->pData->cur_mv;
+		$max_hit = parent::$ch->pData->max_hit;
+		$cur_hit = parent::$ch->pData->cur_hit;
+		$max_ma = parent::$ch->pData->max_ma;
+		$cur_ma = parent::$ch->pData->cur_ma;
+		$max_mv = parent::$ch->pData->max_mv;
+		$cur_mv = parent::$ch->pData->cur_mv;
 		
-		$room = new Room($this->ch);
+		$room = new Room(parent::$ch);
 		$room->load();
 		
-		$this->ch->send("\n\r".$this->colorize("[Health: `i$cur_hit``/`b$max_hit`` | Mana: `n$cur_ma``/`g$max_ma`` | Move: `j$cur_mv``/`c$max_mv`` ] - $room->name")." \n\r");
+		parent::$ch->send("\n\r".$this->colorize("[Health: `i$cur_hit``/`b$max_hit`` | Mana: `n$cur_ma``/`g$max_ma`` | Move: `j$cur_mv``/`c$max_mv`` ] - $room->name")." \n\r");
 	}
 }

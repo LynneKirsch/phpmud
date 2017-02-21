@@ -32,9 +32,16 @@ class Player extends GameInterface
 		{
 			foreach($player_obj as $key=>$val)
 			{
-				if(property_exists($this, $key))
+				if($key == "ch")
 				{
-					$this->{$key} = $val;
+					unset($player_obj->ch);
+				}
+				else
+				{
+					if(property_exists($this, $key))
+					{
+						$this->{$key} = $val;
+					}
 				}
 			}
 		}
@@ -44,18 +51,25 @@ class Player extends GameInterface
 			$this->inventory = new stdClass();
 		}
 
-		$this->equipment = new Equipment($this->ch);
+		$this->equipment = new Equipment(parent::$ch);
 	}
 	
 	function save()
 	{
 		if(empty($this->name))
 		{
-			$this->load($this->ch->pData);
+			$this->load(parent::$ch->pData);
 		}
 		
 		$player_file = fopen("src/db/player/".strtolower($this->name).".json", "w");
 		fwrite($player_file, json_encode($this, JSON_PRETTY_PRINT));
 		fclose($player_file);
 	}
+	
+	public function getFields()
+    {   
+        $parent = parent::getParentFields();
+        $child = array_keys(get_class_vars($this));
+        return array_diff($child, $parent);
+    }
 }

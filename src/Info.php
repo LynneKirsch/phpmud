@@ -41,6 +41,6 @@ class Info extends GameInterface
 		$buf .= " Players Found: ".$count." <br>";
 		$buf .= "`a:`b----------------------------------------------------------------------------`a:`` <br>";
 
-		$this->toChar($this->ch, $buf);
+		$this->toChar(parent::$ch, $buf);
     }
 }

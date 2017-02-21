@@ -20,7 +20,6 @@ class Mobile extends GameInterface
 	
 	function get()
 	{
-		unset($this->ch);
 		return $this;
 	}
 }

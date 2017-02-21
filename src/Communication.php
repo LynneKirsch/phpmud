@@ -6,13 +6,13 @@ class Communication extends GameInterface
 	{
 		global $clients;
 		
-		$this->toChar($this->ch, "You say '`k" . $args . "``'");
+		$this->toChar(parent::$ch, "You say '`k" . $args . "``'");
 		
 		foreach($clients as $client)
 		{
-			if($client != $this->ch && $client->pData->in_room == $this->ch->pData->in_room)
+			if($client != parent::$ch && $client->pData->in_room == parent::$ch->pData->in_room)
 			{
-				$this->toChar($client, $this->ch->pData->name . " says '`k" . $args . "``'");
+				$this->toChar($client, parent::$ch->pData->name . " says '`k" . $args . "``'");
 			}
 		}
 	}
@@ -21,13 +21,13 @@ class Communication extends GameInterface
 	{
 		global $clients;
 		
-		$this->toChar($this->ch, "`l[`fOOC`l] `hYou: ``'`f" . $args . "``'");
+		$this->toChar(parent::$ch, "`l[`fOOC`l] `hYou: ``'`f" . $args . "``'");
 		
 		foreach($clients as $client)
 		{
-			if($client != $this->ch)
+			if($client != parent::$ch)
 			{
-				$this->toChar($client, "`l[`fOOC`l] `h".$this->ch->pData->name . ": ``'`f" . $args . "``'");
+				$this->toChar($client, "`l[`fOOC`l] `h".parent::$ch->pData->name . ": ``'`f" . $args . "``'");
 			}
 		}
 	}

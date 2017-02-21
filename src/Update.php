@@ -25,7 +25,7 @@ class Update extends GameInterface
 		{
 			$room_obj = json_decode(file_get_contents(ROOM_DIR.$room_file->getFilename()));
 			
-			$room = new Room($this->ch);
+			$room = new Room(parent::$ch);
 			$room->load($room_obj->id);
 			
 			foreach($room->resets->mobiles as $id=>$mobile_reset_obj)

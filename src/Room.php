@@ -36,7 +36,7 @@ class Room extends GameInterface
 	{
 		if(is_null($id))
 		{
-			$id = $this->ch->pData->in_room;
+			$id = parent::$ch->pData->in_room;
 		}
 		
 		$room = json_decode(file_get_contents(ROOM_DIR.$id.'.json'));
