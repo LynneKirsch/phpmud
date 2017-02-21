@@ -4,10 +4,11 @@ class GameInterface
 {
 	static $ch;
 	
-	function __construct($ch = null)
+	function __construct(&$ch = null)
 	{
 		self::$ch = $ch;
 	}
+	
 	
 	function objFromChar($obj, $ch)
 	{
@@ -133,4 +134,9 @@ class GameInterface
 
 		return str_replace('``', '<span style="color: #eeeeee;">', $buf);
     }
+	
+	function getData()
+	{
+		return self::$ch;
+	}
 }

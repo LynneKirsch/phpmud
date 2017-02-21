@@ -17,6 +17,7 @@ class Equipment extends GameInterface
 	public $weapon_left = null;
 	public $weapon_right = null;
 	
+<<<<<<< HEAD
 	
 	function __construct($ch = null)
 	{
@@ -36,6 +37,8 @@ class Equipment extends GameInterface
 		}
 	}
 	
+=======
+>>>>>>> parent of 2a1ea82... wip
 	function getDisplayName($slot)
 	{
 		$display_names = array(

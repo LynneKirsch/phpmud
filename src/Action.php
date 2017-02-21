@@ -238,11 +238,17 @@ class Action extends GameInterface
 	
 	function doEquipment()
 	{
+<<<<<<< HEAD
 		$equipment = parent::$ch->pData->equipment;
 		foreach($equipment as $slot => $item)
+=======
+		$eq = new Equipment();
+		
+		foreach($this->ch->pData->equipment as $slot => $item)
+>>>>>>> parent of 2a1ea82... wip
 		{
 			$slot_val = is_null($item) ? 'nothing' : $item->short;
-			$slot_name = $equipment->getDisplayName($slot);
+			$slot_name = $eq->getDisplayName($slot);
 			
 			if($slot_name)
 			{
@@ -279,7 +285,7 @@ class Action extends GameInterface
 				{
 					foreach(explode(' ', $item->wear_flags) as $wear_loc)
 					{
-						if($wear_loc != "" && $wear_loc != null)
+						if($wear_lock != "" && $wear_loc != null)
 						{
 							$eq = new Equipment();
 							

@@ -27,6 +27,7 @@ class Server implements MessageComponentInterface
         global $clients;
         $clients[$ch->resourceId] = $ch;
 		$ch->CONN_STATE = "GET_NAME";
+		$ch->pData = new Player();
 		$ch->send("Who dares storm our wayward path? ");
     }
 
@@ -41,8 +42,8 @@ class Server implements MessageComponentInterface
 		else
 		{
 			$ch->send($args);
-			$login = new Login($ch, $args);
-			$login->start();
+			$login = new Login($ch);
+			$login->start($args);
 		}
 
     }

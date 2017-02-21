@@ -1,16 +1,9 @@
 <?php
 class Login extends GameInterface
 {
-	function __construct($ch, $args)
+	function start($args)
 	{
-		parent::__construct($ch);
-		
-		$this->args = $args;
-	}
-	
-	function start()
-	{
-		$this->{parent::$ch->CONN_STATE}($this->args);
+		$this->{parent::$ch->CONN_STATE}($args);
 	}
 	
 	function GET_NAME($name)
@@ -31,7 +24,6 @@ class Login extends GameInterface
 			}
 			else
 			{
-				parent::$ch->pData = new Player();
 				parent::$ch->pData->name = ucfirst($name);
 				parent::$ch->pData->level = 1;
 				$this->INITIALIZE_CREATION();

@@ -50,8 +50,17 @@ class Player extends GameInterface
 		{
 			$this->inventory = new stdClass();
 		}
+<<<<<<< HEAD
 
 		$this->equipment = new Equipment(parent::$ch);
+=======
+		
+		if(empty($this->equipment))
+		{
+			$this->equipment = new Equipment();
+		}
+		
+>>>>>>> parent of 2a1ea82... wip
 	}
 	
 	function save()

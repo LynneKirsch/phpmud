@@ -1,3 +1,39 @@
+<?php
+//$test_obj = new stdClass();
+//
+//class Class1
+//{
+//	static $class1 = null;
+//	
+//	function __construct($class1)
+//	{
+//		self::$class1 = $class1;
+//	}
+//	
+//	function getClass1()
+//	{
+//		return self::$class1;
+//	}
+//}
+//class Class2 extends Class1
+//{
+//	public $class2 = null;
+//	
+//	function manipulateObj()
+//	{
+//		parent::$class1->new_val = "test2";
+//	}
+//}
+//
+//$class = new Class2($test_obj);
+//$class->manipulateObj();
+//
+//echo '<pre>';
+//print_r($test_obj);
+//echo '</pre>';
+//die();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
