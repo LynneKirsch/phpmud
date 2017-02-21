@@ -71,8 +71,14 @@ class Action extends GameInterface
 	
 	function getAction($obj)
 	{
-		if(in_array('take', explode(' ', $obj->wear_flags)))
+		global $clients; 
+		
+		$room = new Room($this->ch);
+		$room->load();
+		
+		foreach($clients as $client)
 		{
+<<<<<<< HEAD
 			global $clients; 
 
 			$room = new Room(parent::$ch);
@@ -93,7 +99,17 @@ class Action extends GameInterface
 		else
 		{
 			$this->toChar(parent::$ch, "You can't take that.");
+=======
+			if($client != $this->ch && $client->pData->in_room == $this->ch->pData->in_room)
+			{
+				$this->toChar($client, $this->ch->pData->name . " gets " . $obj->short);
+			}
+>>>>>>> parent of 2c944c4... Work in progress, mostly eq / wear.
 		}
+
+		$this->objFromRoom($obj, $room);
+		$this->objToChar($obj, $this->ch);
+		$this->toChar($this->ch, "You get " . $obj->short);
 	}
 	
 	function doDrop($args)
@@ -240,6 +256,7 @@ class Action extends GameInterface
 	{
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$equipment = parent::$ch->pData->equipment;
 		foreach($equipment as $slot => $item)
 =======
@@ -263,6 +280,9 @@ class Action extends GameInterface
 		}
 		
 		$this->doInventory();
+=======
+
+>>>>>>> parent of 2c944c4... Work in progress, mostly eq / wear.
 	}
 	
 	function savePlayer()
@@ -270,6 +290,7 @@ class Action extends GameInterface
 		parent::$ch->pData->save();
 		parent::$ch->send("Saved.\n");
 	}
+<<<<<<< HEAD
 	
 	function doWear($args)
 	{
@@ -320,4 +341,6 @@ class Action extends GameInterface
 			}
 		}
 	}
+=======
+>>>>>>> parent of 2c944c4... Work in progress, mostly eq / wear.
 }

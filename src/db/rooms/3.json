@@ -65,48 +65,17 @@
             "lock_difficulty": null
         }
     },
-    "objects": {},
+    "objects": {
+        "4": {
+            "id": 4,
+            "short": "a beautiful `bred`` rose",
+            "long": "A beautiful `brose`` is worn by the ages.",
+            "keywords": "rose beautiful",
+            "ch": null,
+            "quantity": 2
+        }
+    },
     "mobiles": [
-        {
-            "id": 1,
-            "short": "a commoner",
-            "long": "A commoner stands here, begging for change.",
-            "keywords": "commoner man",
-            "max_hit": 50,
-            "cur_hit": 50
-        },
-        {
-            "id": 1,
-            "short": "a commoner",
-            "long": "A commoner stands here, begging for change.",
-            "keywords": "commoner man",
-            "max_hit": 50,
-            "cur_hit": 50
-        },
-        {
-            "id": 1,
-            "short": "a commoner",
-            "long": "A commoner stands here, begging for change.",
-            "keywords": "commoner man",
-            "max_hit": 50,
-            "cur_hit": 50
-        },
-        {
-            "id": 1,
-            "short": "a commoner",
-            "long": "A commoner stands here, begging for change.",
-            "keywords": "commoner man",
-            "max_hit": 50,
-            "cur_hit": 50
-        },
-        {
-            "id": 1,
-            "short": "a commoner",
-            "long": "A commoner stands here, begging for change.",
-            "keywords": "commoner man",
-            "max_hit": 50,
-            "cur_hit": 50
-        },
         {
             "id": 1,
             "short": "a commoner",

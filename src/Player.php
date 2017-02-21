@@ -52,15 +52,18 @@ class Player extends GameInterface
 		}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		$this->equipment = new Equipment(parent::$ch);
 =======
 =======
 >>>>>>> parent of 2a1ea82... wip
 		
+=======
+>>>>>>> parent of 2c944c4... Work in progress, mostly eq / wear.
 		if(empty($this->equipment))
 		{
-			$this->equipment = new Equipment();
+			$this->equipment = new stdClass();
 		}
 		
 <<<<<<< HEAD
