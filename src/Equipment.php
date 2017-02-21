@@ -1,5 +1,5 @@
 <?php
-class Equipment extends GameInterface
+class Equipment
 {
 	public $light = null;
 	public $head = null;
@@ -16,6 +16,25 @@ class Equipment extends GameInterface
 	public $wrist_right = null;
 	public $weapon_left = null;
 	public $weapon_right = null;
+	
+	
+	function __construct($ch = null)
+	{
+		if(!is_null($ch))
+		{
+			foreach($this as $key=>$val)
+			{
+				if(isset($ch->equipment->{$key}))
+				{
+					$this->{$key} = $this->ch->equipment->{$key};
+				}
+				else
+				{
+					$this->{$key} = $val;
+				}
+			}
+		}
+	}
 	
 	function getDisplayName($slot)
 	{
