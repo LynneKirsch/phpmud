@@ -52,9 +52,9 @@ class Login extends GameInterface
 		if(password_verify($password, $existing_pass))
 		{
 			$this->ch->CONN_STATE = "CONNECTED";
-			$player = new Player();
+			$player = new Player($this->ch);
 			$player->load($player_obj);
-			$this->ch->pData = $player;
+			$this->ch->pData = clone $player;
 			$this->ch->send("\nConnected.\n");
 		}
 		else

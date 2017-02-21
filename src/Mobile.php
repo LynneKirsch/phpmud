@@ -17,11 +17,5 @@ class Mobile extends GameInterface
 			$this->{$property} = $value;
 		}
 	}
-	
-	function get()
-	{
-		unset($this->ch);
-		return $this;
-	}
 }
 

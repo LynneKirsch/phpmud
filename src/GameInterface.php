@@ -7,10 +7,20 @@ class GameInterface
 	function __construct($ch = null)
 	{
 		$this->ch = $ch;
+		
 		if(!is_null($ch))
 		{
 			$this->player = $this->ch->pData;
 		}
+	}
+	
+	// Game interface stuff that doesn't need to be duplicated
+	// on every instance of the game objects gets unset here 
+	// whenever an extending object is cloned.
+	function __clone()
+	{
+		unset($this->ch);
+		unset($this->player);
 	}
 	
 	function objFromChar($obj, $ch)

@@ -3,5 +3,6 @@
     "short": "a beautiful `bred`` rose",
     "long": "A beautiful `brose`` is worn by the ages.",
     "keywords": "rose beautiful",
-    "wear_flags":"head take"
+    "worn":"head",
+	"take":true
 }

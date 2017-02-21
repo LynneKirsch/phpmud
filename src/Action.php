@@ -250,6 +250,7 @@ class Action extends GameInterface
 			}
 		}
 		
+		$this->ch->send("\n");
 		$this->doInventory();
 	}
 	
@@ -277,25 +278,14 @@ class Action extends GameInterface
 			{
 				if(in_array($args, explode(' ', $item->keywords)))
 				{
-					foreach(explode(' ', $item->wear_flags) as $wear_loc)
+					if($item->worn != null)
 					{
-						if($wear_loc != "" && $wear_loc != null)
-						{
-							$eq = new Equipment();
-							
-							if($eq->getDisplayName($wear_loc))
-							{
-								$this->player->inventory->{$wear_loc} = $item;
-							}
-							else
-							{
-								$this->toChar($this->ch, "You can't wear that.");
-							}
-						}
-						else
-						{
-							$this->toChar($this->ch, "You can't wear that.");
-						}
+						$this->player->equipment->{$item->worn} = $item;
+
+					}
+					else
+					{
+						$this->toChar($this->ch, "You can't wear that.");
 					}
 					
 					$this->objFromChar($item, $this->ch);

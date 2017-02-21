@@ -13,7 +13,10 @@ class Update extends GameInterface
 		
 		foreach($clients as $client)
 		{
-			$client->pData->save();
+			if(isset($client->CONN_STATE) && $client->CONN_STATE == "CONNECTED")
+			{
+				$client->pData->save();
+			}
 		}
 	}
 	
@@ -32,7 +35,7 @@ class Update extends GameInterface
 			{
 				$mob = new Mobile();
 				$mob->load($id);
-				$room->mobiles[] = $mob->get();
+				$room->mobiles[] = clone($mob);
 			}
 			
 			$room->save();

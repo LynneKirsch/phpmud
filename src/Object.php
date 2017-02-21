@@ -7,25 +7,15 @@ class Object extends GameInterface
 	public $short;
 	public $long;
 	public $keywords;
-	public $wear_flags;
+	public $worn;
+	public $take;
 	
 	public function save()
 	{
 		if(!empty($this->id))
 		{
-			$ref_object = new ReflectionClass($this);
-			$object = new stdClass();
-			
-			foreach($ref_object->getProperties() as $property)
-			{
-				if($property->class == $ref_object->name)
-				{
-					$object->{$property->name} = $property->getValue($this);
-				}
-			}
-			
-			$object_file = fopen(OBJ_DIR.$object->id.".json", "w");
-			fwrite($object_file, json_encode($object, JSON_PRETTY_PRINT));
+			$object_file = fopen(OBJ_DIR.$this->id.".json", "w");
+			fwrite($object_file, json_encode(clone($this), JSON_PRETTY_PRINT));
 			fclose($object_file);
 		}
 	}

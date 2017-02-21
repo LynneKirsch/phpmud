@@ -27,6 +27,7 @@ class Server implements MessageComponentInterface
         global $clients;
         $clients[$ch->resourceId] = $ch;
 		$ch->CONN_STATE = "GET_NAME";
+		$ch->pData = new stdClass();
 		$ch->send("Who dares storm our wayward path? ");
     }
 

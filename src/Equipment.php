@@ -1,64 +1,34 @@
 <?php
-class Equipment
+class Equipment extends GameInterface
 {
-	public $light = null;
-	public $head = null;
-	public $neck1 = null;
-	public $neck2 = null;
-	public $torso = null;
-	public $chest = null;
-	public $body = null;
-	public $legs = null;
-	public $arms = null;
-	public $feet = null;
-	public $waist = null;
-	public $wrist_left = null;
-	public $wrist_right = null;
-	public $weapon_left = null;
-	public $weapon_right = null;
-	
-	
-	function __construct($ch = null)
+	function load()
 	{
-		if(!is_null($ch))
+		$slots = json_decode(file_get_contents('src/db/equipment_slots.json'));
+		
+		if(!is_null($this->ch))
 		{
-			foreach($this as $key=>$val)
+			foreach($slots as $slot => $name)
 			{
-				if(isset($ch->equipment->{$key}))
+				if(isset($this->ch->pData->equipment->{$slot}))
 				{
-					$this->{$key} = $this->ch->equipment->{$key};
+					$this->{$slot} = $this->ch->pData->equipment->{$slot};
 				}
 				else
 				{
-					$this->{$key} = $val;
+					$this->{$slot} = null;
 				}
 			}
 		}
+
 	}
 	
 	function getDisplayName($slot)
 	{
-		$display_names = array(
-			"light"=>"Used as Light",
-			"head"=>"Worn on Head",
-			"neck1"=>"Worn Around Neck",
-			"neck2"=>"Worn Around Neck",
-			"torso"=>"Worn On Torso",
-			"chest"=>"Worn On Chest",
-			"body"=>"Worn About Body",
-			"legs"=>"Worn On Legs",
-			"arms"=>"Worn On Arms",
-			"feet"=>"Worn On Feet",
-			"wrist_left"=>"Worn Around Wrist",
-			"wrist_right"=>"Worn Around Wrist",
-			"weapon_left"=>"Wielded Left",
-			"weapon_right"=>"Wielded Right",
-			"waist"=>"Worn Around Waist",
-		);
+		$slots = json_decode(file_get_contents('src/db/equipment_slots.json'));
 		
-		if(in_array($slot, array_keys($display_names)))
+		if(in_array($slot, array_keys((array)$slots)))
 		{
-			return $display_names[$slot];
+			return $slots->{$slot};
 		}
 		else
 		{

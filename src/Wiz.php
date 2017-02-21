@@ -24,7 +24,7 @@ class Wiz extends GameInterface
 		{
 			$object = json_decode(file_get_contents(OBJ_DIR.$args.'.json'));
 			$this->objToChar($object, $this->ch);
-			$this->ch->send("You have created " . $object->short . "!\n");
+			$this->toChar($this->ch, "You have created " . $object->short . "!");
 			
 			foreach($clients as $client)
 			{
