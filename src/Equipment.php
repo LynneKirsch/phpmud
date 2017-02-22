@@ -1,17 +1,17 @@
 <?php
 class Equipment extends GameInterface
 {
-	function load()
+	function load($eq)
 	{
 		$slots = json_decode(file_get_contents('src/db/equipment_slots.json'));
 		
 		if(!is_null($this->ch))
 		{
-			foreach($slots as $slot => $name)
+			foreach($slots as $slot => $slot_obj)
 			{
-				if(isset($this->ch->pData->equipment->{$slot}))
+				if(isset($this->ch->pData->equipment->{$slot}) && !is_null($this->ch->pData->equipment->{$slot}))
 				{
-					$this->{$slot} = $this->ch->pData->equipment->{$slot};
+					$this->{$slot} = $eq->{$slot};
 				}
 				else
 				{
@@ -22,7 +22,13 @@ class Equipment extends GameInterface
 
 	}
 	
-	function getDisplayName($slot)
+	function slots()
+	{
+		$slots = json_decode(file_get_contents('src/db/equipment_slots.json'));
+		return $slots;
+	}
+	
+	function getSlot($slot)
 	{
 		$slots = json_decode(file_get_contents('src/db/equipment_slots.json'));
 		

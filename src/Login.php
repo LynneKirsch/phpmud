@@ -52,9 +52,17 @@ class Login extends GameInterface
 		if(password_verify($password, $existing_pass))
 		{
 			$this->ch->CONN_STATE = "CONNECTED";
+			
+			//load player obj
 			$player = new Player($this->ch);
 			$player->load($player_obj);
-			$this->ch->pData = clone $player;
+			$this->ch->pData = $player;
+			
+			echo '<pre>';
+			print_r($player);
+			echo '</pre>';
+			die();
+
 			$this->ch->send("\nConnected.\n");
 		}
 		else
@@ -163,8 +171,11 @@ class Login extends GameInterface
 	
 	function VALIDATE_CREATION()
 	{
+		$player = new Player($this->ch->pData);
+		$player->load();
+		
 		$player_file = fopen('src/db/player/'.strtolower($this->ch->pData->name) . '.json', 'w');
-		fwrite($player_file, json_encode($this->ch->pData, JSON_PRETTY_PRINT));
+		fwrite($player_file, json_encode(clone($player), JSON_PRETTY_PRINT));
 		fclose($player_file);
 		$this->ch->CONN_STATE = "CONNECTED";
 		$this->ch->send("\nYou're is a done.");

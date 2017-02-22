@@ -33,9 +33,9 @@ class Update extends GameInterface
 			
 			foreach($room->resets->mobiles as $id=>$mobile_reset_obj)
 			{
-				$mob = new Mobile();
-				$mob->load($id);
-				$room->mobiles[] = clone($mob);
+//				$mob = new Mobile();
+//				$mob->load($id);
+//				$room->mobiles[] = clone($mob);
 			}
 			
 			$room->save();

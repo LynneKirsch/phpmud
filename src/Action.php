@@ -237,17 +237,21 @@ class Action extends GameInterface
 	}
 	
 	function doEquipment()
-	{
-		$equipment = $this->ch->pData->equipment;
-		foreach($equipment as $slot => $item)
+	{	
+		$eq = $this->player->equipment;
+
+		foreach($eq->slots() as $key=>$slot)
 		{
-			$slot_val = is_null($item) ? 'nothing' : $item->short;
-			$slot_name = $equipment->getDisplayName($slot);
-			
-			if($slot_name)
+			if(isset($eq->{$key}))
 			{
-				$this->toChar($this->ch, "[$slot_name] $slot_val");
+				$slot_val = $eq->{$key}->short;
 			}
+			else
+			{
+				$slot_val = "nothing";
+			}
+			
+			$this->toChar($this->ch, $slot->slot_name . " " . $slot_val);
 		}
 		
 		$this->ch->send("\n");

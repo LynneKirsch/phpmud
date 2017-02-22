@@ -21,6 +21,11 @@ class GameInterface
 	{
 		unset($this->ch);
 		unset($this->player);
+		
+		foreach($this as $key=>$val)
+		{
+			$this->{$key} = $val;
+		}
 	}
 	
 	function objFromChar($obj, $ch)
@@ -115,7 +120,7 @@ class GameInterface
 	{
 		if($ch->CONN_STATE == "CONNECTED")
 		{
-			$ch->send($this->colorize($msg)."\n");
+			$ch->send($this->colorize(htmlspecialchars($msg))."\n");
 		}
 	}
 	

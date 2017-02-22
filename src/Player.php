@@ -46,9 +46,9 @@ class Player extends GameInterface
 		}
 		
 		// load eq obj
-		$eq = new Equipment($this->ch);
-		$eq->load();	
-		$this->equipment = clone($eq);
+			$eq = new Equipment($this->ch);
+			$eq->load($player_obj->equipment);	
+			$this->ch->pData->equipment = clone($eq);
 	}
 	
 	function save()
