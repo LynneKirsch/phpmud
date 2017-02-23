@@ -5,21 +5,50 @@ class Equipment extends GameInterface
 	{
 		$slots = json_decode(file_get_contents('src/db/equipment_slots.json'));
 		
-		if(!is_null($this->ch))
+		if(!is_null($eq))
 		{
 			foreach($slots as $slot => $slot_obj)
 			{
-				if(isset($this->ch->pData->equipment->{$slot}) && !is_null($this->ch->pData->equipment->{$slot}))
+				if($slot_obj->instances > 1)
 				{
-					$this->{$slot} = $eq->{$slot};
+					if(isset($eq->{$slot}) && !is_null($eq->{$slot}))
+					{
+						foreach($eq->{$slot} as $item_obj)
+						{
+							if(!is_null($item_obj))
+							{
+								$object = new Object();
+								$object->load($item_obj->id);
+								$this->{$slot} = clone $object;
+							}
+						}
+					}
+					else
+					{
+						$this->{$slot} = new stdClass();
+						
+						for($i=0;$i>=$slot->instances;$i++)
+						{
+							$this->{$slot}->{$i} = null;
+						}
+					}
 				}
 				else
 				{
-					$this->{$slot} = null;
+					if(isset($eq->{$slot}) && !is_null($eq->{$slot}))
+					{
+						$object = new Object();
+						$object->load($eq->{$slot}->id);
+						$this->{$slot} = clone $object;
+
+					}
+					else
+					{
+						$this->{$slot} = null;
+					}
 				}
 			}
 		}
-
 	}
 	
 	function slots()

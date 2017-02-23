@@ -35,29 +35,31 @@ class Player extends GameInterface
 			{
 				if(property_exists($this, $key))
 				{
-					$this->{$key} = $val;
+					if(empty($val))
+					{
+						$this->{$key} = new stdClass();
+					}
+					else
+					{
+						$this->{$key} = $val;
+					}
 				}
 			}
 		}
 		
-		if(empty($this->inventory))
-		{
-			$this->inventory = new stdClass();
-		}
-		
 		// load eq obj
-			$eq = new Equipment($this->ch);
-			$eq->load($player_obj->equipment);	
-			$this->ch->pData->equipment = clone($eq);
+		$eq = new Equipment();
+		$eq->load($this->equipment);	
+		$this->equipment = clone($eq);
+	}
+	
+	function getEq()
+	{	
+		
 	}
 	
 	function save()
 	{
-		if(empty($this->name))
-		{
-			$this->load($this->ch->pData);
-		}
-		
 		$player_file = fopen("src/db/player/".strtolower($this->name).".json", "w");
 		fwrite($player_file, json_encode(clone($this), JSON_PRETTY_PRINT));
 		fclose($player_file);

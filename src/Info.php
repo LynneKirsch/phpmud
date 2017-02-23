@@ -30,7 +30,7 @@ class Info extends GameInterface
 				$class_pre = str_repeat(" ", (10 - $class_length)/2);
 				$class = $class_pre.$chData->class;
 
-				$buf .= sprintf($line_format, $chData->level, $race, $class, $chData->name, $chData->title);
+				$buf .= sprintf($line_format, $chData->level, $race, $class, $chData->name, ", the wanderer");
 				$buf .= "\n";
 
 				$count++;

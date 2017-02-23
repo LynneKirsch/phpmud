@@ -21,11 +21,6 @@ class GameInterface
 	{
 		unset($this->ch);
 		unset($this->player);
-		
-		foreach($this as $key=>$val)
-		{
-			$this->{$key} = $val;
-		}
 	}
 	
 	function objFromChar($obj, $ch)
@@ -62,7 +57,7 @@ class GameInterface
 		}
 		else
 		{
-			$ch->pData->inventory->{$clone_obj->id} = $clone_obj;
+			$ch->pData->inventory->{$clone_obj->id} = clone $clone_obj;
 		}
 		
 		$ch->pData->save();

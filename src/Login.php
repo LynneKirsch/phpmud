@@ -56,12 +56,7 @@ class Login extends GameInterface
 			//load player obj
 			$player = new Player($this->ch);
 			$player->load($player_obj);
-			$this->ch->pData = $player;
-			
-			echo '<pre>';
-			print_r($player);
-			echo '</pre>';
-			die();
+			$this->ch->pData = clone $player;
 
 			$this->ch->send("\nConnected.\n");
 		}

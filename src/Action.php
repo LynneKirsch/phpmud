@@ -242,16 +242,38 @@ class Action extends GameInterface
 
 		foreach($eq->slots() as $key=>$slot)
 		{
-			if(isset($eq->{$key}))
+			if(is_array($eq->{$key}))
 			{
-				$slot_val = $eq->{$key}->short;
+				foreach($eq->{$key} as $item_obj)
+				{
+					if(!is_null($item_obj))
+					{
+						$slot_val = $item_obj->short;
+					}
+					else
+					{
+						$slot_val = "nothing";
+					}
+					
+					$line_format = "%-25s %s";
+					$this->toChar($this->ch, sprintf($line_format, $slot->slot_name, $slot_val));
+				}
 			}
 			else
 			{
-				$slot_val = "nothing";
+				if(!is_null($eq->{$key}))
+				{
+					$slot_val = $eq->{$key}->short;
+				}
+				else
+				{
+					$slot_val = "nothing";
+				}
+				
+				$line_format = "%-25s %s";
+				$this->toChar($this->ch, sprintf($line_format, $slot->slot_name, $slot_val));
 			}
 			
-			$this->toChar($this->ch, $slot->slot_name . " " . $slot_val);
 		}
 		
 		$this->ch->send("\n");

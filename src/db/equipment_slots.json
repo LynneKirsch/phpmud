@@ -1,70 +1,70 @@
 {
 	"light":{
 	    "slot_name":"<used as light>",
-	    "instances":1
+	    "instances":"1"
 	},
 	"finger":{
 	    "slot_name":"<worn on finger>",
-	    "instances":2
+	    "instances":"2"
 	},
 	"neck":{
 	    "slot_name":"<worn around neck>",
-	    "instances":2
+	    "instances":"2"
 	},
 	"torso":{
 	    "slot_name":"<worn on torso>",
-	    "instances":1
+	    "instances":"1"
 	},
 	"head":{
 	    "slot_name":"<worn on head>",
-	    "instances":1
+	    "instances":"1"
 	},
 	"legs":{
 	    "slot_name":"<worn on legs>",
-	    "instances":1
+	    "instances":"1"
 	},
 	"feet":{
 	    "slot_name":"<worn on feet>",
-	    "instances":1
+	    "instances":"1"
 	},
 	"hands":{
 	    "slot_name":"<worn on hands>",
-	    "instances":1
+	    "instances":"1"
 	},
 	"arms":{
 	    "slot_name":"<worn on arms>",
-	    "instances":1
+	    "instances":"1"
 	},
 	"shield":{
 	    "slot_name":"<worn as shield>",
-	    "instances":1
+	    "instances":"1"
 	},
 	"waist":{
 	    "slot_name":"<worn about waist>",
-	    "instances":1
+	    "instances":"1"
 	},
 	"wrist":{
 	    "slot_name":"<worn around wrist>",
-	    "instances":2
+	    "instances":"2"
 	},
 	"light":{
 	    "slot_name":"<used as light>",
-	    "instances":1
+	    "instances":"1"
 	},
 	"wield_right":{
 	    "slot_name":"<weilded right>",
-	    "instances":1
+	    "instances":"1"
 	},
 	"wield_left":{
 	    "slot_name":"<wielded_left>",
-	    "instances":1
+	    "instances":"1"
 	},
 	"held":{
 	    "slot_name":"<held>",
-	    "instances":1
+	    "instances":"1"
 	},
 	"float":{
 	    "slot_name":"<floating_nearby>",
-	    "instances":1
+	    "instances":"1"
 	}
 }
