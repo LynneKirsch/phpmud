@@ -1,0 +1,9 @@
+{
+    "spell_id":"1",
+    "spell_name":"fireball",
+    "spell_level":{
+	"mage":"1"
+    },
+    "spell_class":"CLS_Mage",
+    "spell_action":"fireball"
+}

@@ -51,6 +51,8 @@ class Player extends GameInterface
 		$eq = new Equipment();
 		$eq->load($this->equipment);	
 		$this->equipment = clone($eq);
+		
+		$this->save();
 	}
 	
 	function getEq()

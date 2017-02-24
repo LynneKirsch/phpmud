@@ -286,13 +286,51 @@ class Action extends GameInterface
 		$this->ch->send("Saved.\n");
 	}
 	
+	
+	function doRemove($args)
+	{
+		$eq = $this->player->equipment;
+		
+		if($args == "")
+		{
+			$this->ch->send("Remove what?\n");
+			return;
+		}
+		
+		foreach($eq as $slot => $eq_item)
+		{
+			if(is_array($eq_item))
+			{
+				
+			}
+			else
+			{
+				if(!is_null($eq_item))
+				{
+					if(in_array($args, explode(' ', $eq_item->keywords)))
+					{
+						$this->toChar($this->ch, "You remove " . $eq_item->short);
+						$this->objToChar($eq_item, $this->ch);
+						$eq->{$slot} = null;
+					}	
+				}
+			}
+		}
+		
+		$this->player->save();
+	}
+	
 	function doWear($args)
 	{
+		$eq = $this->player->equipment;
+		
 		if($args == "")
 		{
 			$this->ch->send("Wear what?\n");
 			return;
 		}
+		
+		$item_found = false;
 		
 		foreach($this->player->inventory as $item)
 		{
@@ -306,22 +344,59 @@ class Action extends GameInterface
 				{
 					if($item->worn != null)
 					{
-						$this->player->equipment->{$item->worn} = $item;
-
+						if(is_array($eq->{$item->worn}))
+						{
+							$found_empty_slot = false;
+							
+							foreach($eq->{$item->worn} as $key => $eq_item)
+							{
+								if(is_null($eq_item))
+								{
+									$eq->{$item->worn}[$key] = $item;
+									$found_empty_slot = true;
+								}
+							}
+							
+							if(!$found_empty_slot)
+							{
+								$this->toChar($this->ch, "You remove " . $eq->{$item->worn}[0]->short);
+								$this->objToChar($eq->{$item->worn}[0], $this->ch); 
+								$eq->{$item->worn}[0] = $item;	
+							}
+						}
+						else
+						{
+							if(!is_null($eq->{$item->worn}))
+							{
+								$this->toChar($this->ch, "You remove " . $eq->{$item->worn}->short);
+								$this->objToChar($eq->{$item->worn}, $this->ch); 
+								$eq->{$item->worn} = $item;					
+							}
+							else
+							{
+								$this->player->equipment->{$item->worn} = $item;
+							}
+						}
+						
+						$item_found = true;
+						$this->objFromChar($item, $this->ch);
+						$wear_buf = sprintf($eq->slots()->{$item->worn}->wear_text, $item->short);
+						$this->toChar($this->ch, $wear_buf);
 					}
 					else
 					{
 						$this->toChar($this->ch, "You can't wear that.");
 					}
-					
-					$this->objFromChar($item, $this->ch);
-					break;
-				}
-				else
-				{
-					$this->toChar($this->ch, "You're not carrying that.");
 				}
 			}
 		}
+		
+		if(!$item_found)
+		{
+			$this->toChar($this->ch, "You're not carrying that.");
+		}
+		
+		$this->player->save();
+				
 	}
 }

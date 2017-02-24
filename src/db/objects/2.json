@@ -1,5 +1,8 @@
 {
     "id": 2,
-    "short": null,
-    "long": null
+    "short": "a `bnetherworld`` ring",
+    "long": "A beautiful `brose`` is worn by the ages.",
+    "keywords": "netherworld ring",
+    "worn":"finger",
+    "take":true
 }

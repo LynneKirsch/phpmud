@@ -16,4 +16,6 @@ require_once('Mobile.php');
 require_once('Equipment.php');
 require_once('Login.php');
 require_once('Update.php');
+require_once('Magic.php');
+require_once('Classes/Mage.php');
 

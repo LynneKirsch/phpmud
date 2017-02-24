@@ -166,9 +166,10 @@ class Login extends GameInterface
 	
 	function VALIDATE_CREATION()
 	{
-		$player = new Player($this->ch->pData);
-		$player->load();
-		
+		$player = new Player($this->ch);
+		$player->load($this->ch->pData);
+		$this->ch->pData = clone $player;
+
 		$player_file = fopen('src/db/player/'.strtolower($this->ch->pData->name) . '.json', 'w');
 		fwrite($player_file, json_encode(clone($player), JSON_PRETTY_PRINT));
 		fclose($player_file);

@@ -11,26 +11,25 @@ class Equipment extends GameInterface
 			{
 				if($slot_obj->instances > 1)
 				{
-					if(isset($eq->{$slot}) && !is_null($eq->{$slot}))
+					if(isset($eq->{$slot}) && !is_null($eq->{$slot}) && is_array($eq->{$slot}))
 					{
-						foreach($eq->{$slot} as $item_obj)
+						foreach($eq->{$slot} as $key => $item_obj)
 						{
-							if(!is_null($item_obj))
+							if(!is_null($item_obj) && !is_null($item_obj->id))
 							{
 								$object = new Object();
 								$object->load($item_obj->id);
-								$this->{$slot} = clone $object;
+								$this->{$slot}[$key] = clone $object;
+							}
+							else
+							{
+								$this->{$slot}[$key] = null;
 							}
 						}
 					}
 					else
 					{
-						$this->{$slot} = new stdClass();
-						
-						for($i=0;$i>=$slot->instances;$i++)
-						{
-							$this->{$slot}->{$i} = null;
-						}
+						$this->{$slot} = array_fill(0, $slot_obj->instances, null);
 					}
 				}
 				else
@@ -40,7 +39,6 @@ class Equipment extends GameInterface
 						$object = new Object();
 						$object->load($eq->{$slot}->id);
 						$this->{$slot} = clone $object;
-
 					}
 					else
 					{

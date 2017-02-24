@@ -149,6 +149,16 @@
 		"class":"Action",
 		"level":1
 	},
+	"remove":{
+		"action":"doRemove",
+		"class":"Action",
+		"level":1
+	},
+	"cast":{
+		"action":"doCast",
+		"class":"Magic",
+		"level":1
+	},
 	"who":{
 		"action":"doWho",
 		"class":"Info",

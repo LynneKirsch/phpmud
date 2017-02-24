@@ -1,70 +1,82 @@
 {
 	"light":{
 	    "slot_name":"<used as light>",
-	    "instances":"1"
+	    "instances":"1",
+	    "wear_text":"You hold %s and light shines forth from it."
 	},
 	"finger":{
 	    "slot_name":"<worn on finger>",
-	    "instances":"2"
+	    "instances":"2",
+	    "wear_text":"You slide %s onto your finger."
 	},
 	"neck":{
 	    "slot_name":"<worn around neck>",
-	    "instances":"2"
+	    "instances":"2",
+	    "wear_text":"You hang %s around your neck."
 	},
 	"torso":{
 	    "slot_name":"<worn on torso>",
-	    "instances":"1"
+	    "instances":"1",
+	    "wear_text":""
 	},
 	"head":{
 	    "slot_name":"<worn on head>",
-	    "instances":"1"
+	    "instances":"1",
+	    "wear_text":""
 	},
 	"legs":{
 	    "slot_name":"<worn on legs>",
-	    "instances":"1"
+	    "instances":"1",
+	    "wear_text":""
 	},
 	"feet":{
 	    "slot_name":"<worn on feet>",
-	    "instances":"1"
+	    "instances":"1",
+	    "wear_text":""
 	},
 	"hands":{
 	    "slot_name":"<worn on hands>",
-	    "instances":"1"
+	    "instances":"1",
+	    "wear_text":""
 	},
 	"arms":{
 	    "slot_name":"<worn on arms>",
-	    "instances":"1"
+	    "instances":"1",
+	    "wear_text":""
 	},
 	"shield":{
 	    "slot_name":"<worn as shield>",
-	    "instances":"1"
+	    "instances":"1",
+	    "wear_text":""
 	},
 	"waist":{
 	    "slot_name":"<worn about waist>",
-	    "instances":"1"
+	    "instances":"1",
+	    "wear_text":""
 	},
 	"wrist":{
 	    "slot_name":"<worn around wrist>",
-	    "instances":"2"
-	},
-	"light":{
-	    "slot_name":"<used as light>",
-	    "instances":"1"
+	    "instances":"2",
+	    "wear_text":""
 	},
 	"wield_right":{
 	    "slot_name":"<weilded right>",
-	    "instances":"1"
+	    "instances":"1",
+	    "wear_text":""
 	},
 	"wield_left":{
 	    "slot_name":"<wielded_left>",
-	    "instances":"1"
+	    "instances":"1",
+	    "wear_text":""
 	},
 	"held":{
 	    "slot_name":"<held>",
-	    "instances":"1"
+	    "instances":"1",
+	    "wear_text":""
 	},
 	"float":{
 	    "slot_name":"<floating_nearby>",
-	    "instances":"1"
+	    "instances":"1",
+	    "wear_text":"You release %s and it floats next to you."
 	}
 }

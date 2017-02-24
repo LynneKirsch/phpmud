@@ -10,7 +10,10 @@ class GameInterface
 		
 		if(!is_null($ch))
 		{
-			$this->player = $this->ch->pData;
+			if(isset($this->ch->pData))
+			{
+				$this->player = $this->ch->pData;
+			}
 		}
 	}
 	
