@@ -1,5 +1,0 @@
-# Ignore everything
-nbproject/*
-
-# Except this file
-!.gitignore
