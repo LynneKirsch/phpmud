@@ -1,10 +1,10 @@
 <?php
-class Update extends GameInterface
+class Update extends PlayerInterface
 {
 	function doTick()
 	{
 		$this->savePlayerCharacters();
-		$this->doResets();
+		//$this->doResets();
 	}
 	
 	function savePlayerCharacters()
@@ -28,14 +28,29 @@ class Update extends GameInterface
 		{
 			$room_obj = json_decode(file_get_contents(ROOM_DIR.$room_file->getFilename()));
 			
+			$room_id = $room_obj->id;
 			$room = new Room($this->ch);
 			$room->load($room_obj->id);
 			
-			foreach($room->resets->mobiles as $id=>$mobile_reset_obj)
+			foreach($room->resets->mobiles as $mob_reset)
 			{
-//				$mob = new Mobile();
-//				$mob->load($id);
-//				$room->mobiles[] = clone($mob);
+				global $counts;
+				$do_reset = true;
+				
+				$mob_id = $mob_reset->id;
+				
+				if($counts->getMobileRoomCount($mob_id, $room_id) >= $mob_reset->max_in_room)
+				{
+					$do_reset = false;
+				}
+				
+				if($do_reset)
+				{
+					$mob = new Mobile();
+					$mob->load($mob_reset->id);
+					$room->mobiles[] = clone($mob);
+					$counts->addMob($mob_id, $room_id);
+				}
 			}
 			
 			$room->save();

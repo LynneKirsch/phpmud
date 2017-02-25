@@ -1,5 +1,5 @@
 <?php
-class Room extends GameInterface
+class Room extends PlayerInterface
 {
 	public $id;
 	public $area_id;

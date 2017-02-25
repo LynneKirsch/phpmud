@@ -1,5 +1,5 @@
 <?php
-class Info extends GameInterface
+class Info extends PlayerInterface
 {
 	function doWho()
     {	

@@ -1,5 +1,5 @@
 <?php
-class Wiz extends GameInterface
+class Wiz extends PlayerInterface
 {
 	function createObject()
 	{

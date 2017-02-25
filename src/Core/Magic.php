@@ -1,5 +1,5 @@
 <?php
-class Magic extends GameInterface
+class Magic extends PlayerInterface
 {
 	function doCast($args)
 	{

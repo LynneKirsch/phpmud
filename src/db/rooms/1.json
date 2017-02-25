@@ -68,21 +68,24 @@
     "objects": {},
     "mobiles": [],
     "resets": {
-        "objects": {
-            "5": {
+        "objects": 
+	{
+            "5": 
+	    {
                 "id": 5,
                 "quantity": 1,
-                "where": {
+                "where": 
+		{
                     "in_room": 1
                 }
             }
         },
-        "mobiles": {
-            "1": {
-                "quantity": 1,
-                "max_in_room": 1,
-                "max_in_area": 1
-            }
-        }
+        "mobiles": [
+	    {
+		"id":1,
+		"max_in_room":2,
+		"max_in_area":6
+	    }
+	]
     }
 }

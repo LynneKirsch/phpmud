@@ -1,6 +1,6 @@
 <?php
 
-class Communication extends GameInterface
+class Communication extends PlayerInterface
 {
 	function doSay($args)
 	{

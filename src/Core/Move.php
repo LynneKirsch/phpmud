@@ -1,5 +1,5 @@
 <?php
-class Move extends GameInterface
+class Move extends PlayerInterface
 {
 	function doNorth()
 	{

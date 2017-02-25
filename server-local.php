@@ -1,6 +1,6 @@
 <?php 
 require 'vendor/autoload.php';
-require 'src/autoload.php';
+require 'autoload.php';
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 use Ratchet\Server\IoServer;
@@ -9,8 +9,7 @@ use Ratchet\WebSocket\WsServer;
 use React\Socket\Server as Reactor;
 use React\EventLoop\Factory as LoopFactory;;
 
-$clients = array();
-$DB_OBJ = new Database();
+$world = new WorldInterface();
 
 class Server implements MessageComponentInterface
 {   
@@ -20,12 +19,17 @@ class Server implements MessageComponentInterface
         {
             $this->doTick();
         });
+		
+        $loop->addPeriodicTimer(2, function() 
+        {
+            $this->doBeat();
+        });
 	}
 
     public function onOpen(ConnectionInterface $ch) 
     {
-        global $clients;
-        $clients[$ch->resourceId] = $ch;
+        global $world;
+        $world->players[$ch->resourceId] = $ch;
 		$ch->CONN_STATE = "GET_NAME";
 		$ch->pData = new stdClass();
 		$ch->send("Who dares storm our wayward path? ");
@@ -50,9 +54,18 @@ class Server implements MessageComponentInterface
 
     public function onClose(ConnectionInterface $ch) 
     {
-        global $clients;
-        unset($clients[$ch->resourceId]);
-        echo "Player {$ch->pData->name} has disconnected\n";
+        global $world;
+        unset($world->players[$ch->resourceId]);
+		
+		if(isset($ch->pData) && $ch->pData->CONN_STATE == "CONNECTED")
+		{
+			echo "Player {$ch->pData->name} has disconnected\n";
+		}
+		else
+		{
+			echo "Connection " . $ch->resourceId . " has disconnected.";
+		}
+       
     }
 
     public function onError(ConnectionInterface $conn, \Exception $e) 
@@ -65,6 +78,13 @@ class Server implements MessageComponentInterface
     {
         $update = new Update();
 		$update->doTick();
+    }
+	
+	
+    public function doBeat()
+    {
+		$combat = new Combat();
+		$combat->initializeBeat();
     }
 }
 

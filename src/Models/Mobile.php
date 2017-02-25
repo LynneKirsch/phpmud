@@ -1,5 +1,5 @@
 <?php
-class Mobile extends GameInterface
+class Mobile extends PlayerInterface
 {
 	public $id;
 	public $short;

@@ -1,7 +1,7 @@
 <?php
 
 
-class Object extends GameInterface
+class Object extends PlayerInterface
 {
 	public $id;
 	public $short;

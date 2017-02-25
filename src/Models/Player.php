@@ -1,5 +1,5 @@
 <?php
-class Player extends GameInterface
+class Player extends PlayerInterface
 {
 	public $name;
 	public $level;

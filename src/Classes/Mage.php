@@ -1,5 +1,5 @@
 <?php
-class CLS_Mage extends GameInterface
+class CLS_Mage extends PlayerInterface
 {
 	function fireball()
 	{

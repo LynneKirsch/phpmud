@@ -1,5 +1,5 @@
 <?php
-class Action extends GameInterface
+class Action extends PlayerInterface
 {
 	function doInventory()
 	{

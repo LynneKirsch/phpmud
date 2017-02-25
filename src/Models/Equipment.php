@@ -1,5 +1,5 @@
 <?php
-class Equipment extends GameInterface
+class Equipment extends PlayerInterface
 {
 	function load($eq)
 	{

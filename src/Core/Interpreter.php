@@ -1,6 +1,6 @@
 <?php
 
-class Interpreter extends GameInterface
+class Interpreter extends PlayerInterface
 {
 	function interpret($args)
 	{
@@ -18,7 +18,7 @@ class Interpreter extends GameInterface
 		else
 		{
 			$command_string = implode(' ', $arg_array);
-			$command = $DB_OBJ->getCommand($arg);
+			$command = $this->getCommand($arg);
 
 			if($command && $command->level <= $this->ch->pData->level)
 			{
@@ -49,5 +49,37 @@ class Interpreter extends GameInterface
 		$room->load();
 		
 		$this->ch->send("\n\r".$this->colorize("[Health: `i$cur_hit``/`b$max_hit`` | Mana: `n$cur_ma``/`g$max_ma`` | Move: `j$cur_mv``/`c$max_mv`` ] - $room->name")." \n\r");
+	}
+	
+	function getCommands()
+	{
+		return json_decode(file_get_contents('src/db/commands.json'));
+	}
+	
+	function getCommand($arg)
+	{
+		$commands = (array)$this->getCommands(); 
+		$command_found = false;
+		
+		if(in_array($arg, array_keys($commands)))
+		{
+			return $commands[$arg];
+		}
+		else
+		{
+			foreach($commands as $key=>$command)
+			{
+				if(strpos($key, $arg)===0)
+				{
+					$command_found = true;
+					return $command;
+				}
+			}
+			
+			if(!$command_found)
+			{
+				return false;
+			}
+		}
 	}
 }

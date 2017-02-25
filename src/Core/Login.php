@@ -1,12 +1,17 @@
 <?php
-class Login extends GameInterface
+class Login extends PlayerInterface
 {
+	public $ch;
+	public $args;
+	
 	function __construct($ch, $args)
 	{
-		$this->ch = $ch;
+		parent::__construct();
+		
 		$this->args = $args;
 		
 	}
+	
 	function start()
 	{
 		$this->{$this->ch->CONN_STATE}($this->args);
@@ -24,7 +29,7 @@ class Login extends GameInterface
 		else
 		{
 			if(file_exists('src/db/player/' . $name . '.json'))
-			{
+			{		
 				$this->ch->TMP_NAME = $name;
 				$this->GET_EXISTING_PLAYER_PASS();
 			}
@@ -51,14 +56,37 @@ class Login extends GameInterface
 		
 		if(password_verify($password, $existing_pass))
 		{
+			$link_found = false;
+			$link = null;
+			
+			global $clients;
 			$this->ch->CONN_STATE = "CONNECTED";
 			
+			foreach($clients as $client)
+			{
+				if(isset($client->pData) && $client->CONN_STATE == "CONNECTED")
+				{
+					if($client->pData->name == $this->ch->TMP_NAME)
+					{
+						$link = $client->pData;
+						$link_found = true;
+					}
+				}
+			}
+			
 			//load player obj
-			$player = new Player($this->ch);
-			$player->load($player_obj);
-			$this->ch->pData = clone $player;
-
-			$this->ch->send("\nConnected.\n");
+			if($link_found)
+			{
+				$this->ch->pData = $link;
+				$this->ch->send("\You have reconnected.\n");
+			}
+			else
+			{
+				$player = new Player($this->ch);
+				$player->load($player_obj);
+				$this->ch->pData = clone $player;
+				$this->ch->send("\nConnected.\n");
+			}
 		}
 		else
 		{
