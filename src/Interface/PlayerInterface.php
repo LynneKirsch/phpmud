@@ -1,5 +1,5 @@
 <?php
-class PlayerInterface 
+class PlayerInterface extends WorldInterface
 {
 	public $ch;
 	
@@ -8,6 +8,7 @@ class PlayerInterface
 		global $world;
 		
 		$this->players = $world->players;
+		$this->connecting = $world->connecting;
 		$this->ch = $ch;
 		
 		if(!is_null($ch))
@@ -24,6 +25,7 @@ class PlayerInterface
 		unset($this->ch);
 		unset($this->player);
 		unset($this->players);
+		unset($this->connecting);
 	}
 	
 	function damageToChar($ch, $dmg)

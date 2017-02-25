@@ -29,7 +29,7 @@ class Server implements MessageComponentInterface
     public function onOpen(ConnectionInterface $ch) 
     {
         global $world;
-        $world->players[$ch->resourceId] = $ch;
+        $world->connecting[$ch->resourceId] = $ch;
 		$ch->CONN_STATE = "GET_NAME";
 		$ch->pData = new stdClass();
 		$ch->send("Who dares storm our wayward path? ");
@@ -55,17 +55,21 @@ class Server implements MessageComponentInterface
     public function onClose(ConnectionInterface $ch) 
     {
         global $world;
-        unset($world->players[$ch->resourceId]);
 		
-		if(isset($ch->pData) && $ch->CONN_STATE == "CONNECTED")
+		if(isset($ch->pData->name))
 		{
-			echo "Player {$ch->pData->name} has disconnected\n";
+			if(isset($world->players[$ch->pData->name]))
+			{
+				echo "Player {$ch->pData->name} has disconnected\n";
+				unset($world->players->{$ch->pData->name});
+			}
 		}
-		else
+		
+		if(isset($world->connecting->{$ch->resourceId}))
 		{
 			echo "Connection " . $ch->resourceId . " has disconnected.";
+			unset($world->connecting->{$ch->resourceId});
 		}
-       
     }
 
     public function onError(ConnectionInterface $conn, \Exception $e) 

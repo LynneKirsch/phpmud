@@ -51,6 +51,8 @@ class Login extends PlayerInterface
 	
 	function VALIDATE_PLAYER_LOGIN($password)
 	{
+		global $world;
+		
 		$player_obj = json_decode(file_get_contents('src/db/player/'.strtolower($this->ch->TMP_NAME).'.json'));
 		$existing_pass = $player_obj->password;
 		
@@ -61,13 +63,13 @@ class Login extends PlayerInterface
 
 			$this->ch->CONN_STATE = "CONNECTED";
 			
-			foreach($this->players as $client)
+			foreach($this->players as $player)
 			{
-				if(isset($client->pData->name) && $client->CONN_STATE === "CONNECTED")
+				if(isset($player->pData->name) && $player->CONN_STATE === "CONNECTED")
 				{
-					if($client->pData->name == $this->ch->TMP_NAME)
+					if($player->pData->name == $this->ch->TMP_NAME)
 					{
-						$link = $client->pData;
+						$link = $player->pData;
 						$link_found = true;
 					}
 				}
@@ -77,13 +79,21 @@ class Login extends PlayerInterface
 			if($link_found)
 			{
 				$this->ch->pData = $link;
+				$this->world->players[$this->ch->pData->name] = $this->ch;
 				$this->ch->send("\You have reconnected.\n");
 			}
 			else
 			{
+				if(isset($world->connecting[$this->ch->resourceId]))
+				{
+					unset($world->connecting[$this->ch->resourceId]);
+				}
+				
 				$player = new Player($this->ch);
 				$player->load($player_obj);
 				$this->ch->pData = clone $player;
+				
+				$world->players[$this->ch->pData->name] = $this->ch;
 				$this->ch->send("\nConnected.\n");
 			}
 		}
@@ -193,6 +203,8 @@ class Login extends PlayerInterface
 	
 	function VALIDATE_CREATION()
 	{
+		global $world;
+		
 		$player = new Player($this->ch);
 		$player->load($this->ch->pData);
 		$this->ch->pData = clone $player;
@@ -200,6 +212,14 @@ class Login extends PlayerInterface
 		$player_file = fopen('src/db/player/'.strtolower($this->ch->pData->name) . '.json', 'w');
 		fwrite($player_file, json_encode(clone($player), JSON_PRETTY_PRINT));
 		fclose($player_file);
+		
+		if(isset($world->connecting[$this->ch->resourceId]))
+		{
+			unset($world->connecting[$this->ch->resourceId]);
+		}
+		
+		$world->players[$this->ch->pData->name] = $this->ch;
+		
 		$this->ch->CONN_STATE = "CONNECTED";
 		$this->ch->send("\nYou're is a done.");
 	}
