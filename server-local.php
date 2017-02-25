@@ -1,6 +1,6 @@
 <?php 
 require 'vendor/autoload.php';
-require 'autoload.php';
+require 'src/autoload.php';
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 use Ratchet\Server\IoServer;
@@ -57,7 +57,7 @@ class Server implements MessageComponentInterface
         global $world;
         unset($world->players[$ch->resourceId]);
 		
-		if(isset($ch->pData) && $ch->pData->CONN_STATE == "CONNECTED")
+		if(isset($ch->pData) && $ch->CONN_STATE == "CONNECTED")
 		{
 			echo "Player {$ch->pData->name} has disconnected\n";
 		}

@@ -4,11 +4,9 @@ class Communication extends PlayerInterface
 {
 	function doSay($args)
 	{
-		global $clients;
-		
 		$this->toChar($this->ch, "You say '`k" . $args . "``'");
 		
-		foreach($clients as $client)
+		foreach($this->players as $client)
 		{
 			if($client != $this->ch && $client->pData->in_room == $this->ch->pData->in_room)
 			{
@@ -19,11 +17,9 @@ class Communication extends PlayerInterface
 	
 	function doOOC($args)
 	{
-		global $clients;
-		
 		$this->toChar($this->ch, "`l[`fOOC`l] `hYou: ``'`f" . $args . "``'");
 		
-		foreach($clients as $client)
+		foreach($this->players as $client)
 		{
 			if($client != $this->ch)
 			{

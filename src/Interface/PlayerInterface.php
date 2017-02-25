@@ -7,8 +7,7 @@ class PlayerInterface
 	{
 		global $world;
 		
-		$this->players = $world->players
-				
+		$this->players = $world->players;
 		$this->ch = $ch;
 		
 		if(!is_null($ch))
@@ -19,10 +18,7 @@ class PlayerInterface
 			}
 		}
 	}
-	
-	// Game interface stuff that doesn't need to be duplicated
-	// on every instance of the game objects gets unset here 
-	// whenever an extending object is cloned.
+
 	function __clone()
 	{
 		unset($this->ch);
@@ -142,6 +138,21 @@ class PlayerInterface
 		{
 			$ch->send($this->colorize(htmlspecialchars($msg))."\n");
 		}
+	}
+	
+	function doPrompt()
+	{
+		$max_hit = $this->player->max_hit;
+		$cur_hit = $this->player->cur_hit;
+		$max_ma = $this->player->max_ma;
+		$cur_ma = $this->player->cur_ma;
+		$max_mv = $this->player->max_mv;
+		$cur_mv = $this->player->cur_mv;
+		
+		$room = new Room($this->ch);
+		$room->load();
+		
+		$this->ch->send("\n\r".$this->colorize("[Health: `i$cur_hit``/`b$max_hit`` | Mana: `n$cur_ma``/`g$max_ma`` | Move: `j$cur_mv``/`c$max_mv`` ] - $room->name")." \n\r");
 	}
 	
 	function colorize($msg)

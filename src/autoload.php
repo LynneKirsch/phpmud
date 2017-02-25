@@ -3,12 +3,12 @@ class GameAutoload
 {
 	function __construct()
 	{
-		$this->loadDir('src/Config');
-		$this->loadDir('src/Interface');
-		$this->loadDir('src/Models');
-		$this->loadDir('src/Core');
-		$this->loadDir('src/Classes');
-		$this->loadDir('src/Races');
+		$this->loadDir('Config');
+		$this->loadDir('Interface');
+		$this->loadDir('Models');
+		$this->loadDir('Core');
+		$this->loadDir('Classes');
+		$this->loadDir('Races');
 	}
 	
 	function loadDir($dir)

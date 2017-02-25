@@ -3,17 +3,15 @@ class Info extends PlayerInterface
 {
 	function doWho()
     {	
-		global $clients; 
-		
 		$buf = "";
 
 		$buf .= "`a:`b----------------------------------------------------------------------------`a:`` \n";
 		$buf .= "`d[`h\`d][`h/`d][`h\`d][`h/`d][`h\`d][`h/`d][`h\`d][`h/`d][`h\`d]`o Players in this Realm  `d[`h\`d][`h/`d][`h\`d][`h/`d][`h\`d][`h/`d][`h\`d][`h/`d][`h\`d]`` \n";
 		$buf .= "`a:`b----------------------------------------------------------------------------`a:`` \n";
-		$clients = array_reverse($clients);
+		$players = array_reverse($this->players);
 		$count = 0;
 
-		foreach($clients as $client)
+		foreach($players as $client)
 		{
 
 			$chData = $client->pData;

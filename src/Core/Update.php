@@ -9,9 +9,7 @@ class Update extends PlayerInterface
 	
 	function savePlayerCharacters()
 	{
-		global $clients;
-		
-		foreach($clients as $client)
+		foreach($this->players as $client)
 		{
 			if(isset($client->CONN_STATE) && $client->CONN_STATE == "CONNECTED")
 			{

@@ -6,7 +6,7 @@ class Login extends PlayerInterface
 	
 	function __construct($ch, $args)
 	{
-		parent::__construct();
+		parent::__construct($ch);
 		
 		$this->args = $args;
 		
@@ -58,13 +58,12 @@ class Login extends PlayerInterface
 		{
 			$link_found = false;
 			$link = null;
-			
-			global $clients;
+
 			$this->ch->CONN_STATE = "CONNECTED";
 			
-			foreach($clients as $client)
+			foreach($this->players as $client)
 			{
-				if(isset($client->pData) && $client->CONN_STATE == "CONNECTED")
+				if(isset($client->pData->name) && $client->CONN_STATE === "CONNECTED")
 				{
 					if($client->pData->name == $this->ch->TMP_NAME)
 					{

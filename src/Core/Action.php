@@ -73,12 +73,10 @@ class Action extends PlayerInterface
 	{
 		if(in_array('take', explode(' ', $obj->wear_flags)))
 		{
-			global $clients; 
-
 			$room = new Room($this->ch);
 			$room->load();
 
-			foreach($clients as $client)
+			foreach($this->players as $client)
 			{
 				if($client != $this->ch && $client->pData->in_room == $this->ch->pData->in_room)
 				{
@@ -135,12 +133,10 @@ class Action extends PlayerInterface
 	
 	function dropAction($item)
 	{
-		global $clients;
-		
 		$room = new Room($this->ch);
 		$room->load();
 		
-		foreach($clients as $client)
+		foreach($this->players as $client)
 		{
 			if($client != $this->ch && $client->pData->in_room == $this->player->in_room)
 			{
@@ -155,7 +151,6 @@ class Action extends PlayerInterface
 	
 	function doLook()
 	{
-		global $clients;
 		$room = new Room($this->ch);
 		$room->load($this->ch->pData->in_room);
 		$this->ch->send($room->name."\n");
@@ -215,11 +210,11 @@ class Action extends PlayerInterface
 			}
 		}
 		
-		foreach($clients as $client)
+		foreach($this->players as $player)
 		{
-			if($client != $this->ch && $client->pData->in_room === $this->ch->pData->in_room)
+			if($player != $this->ch && $player->pData->in_room === $this->player->in_room)
 			{
-				$this->toChar($this->ch, $client->pData->name." is here.");
+				$this->toChar($this->ch, $player->pData->name." is here.");
 			}
 		}
 	}

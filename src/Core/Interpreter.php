@@ -36,21 +36,6 @@ class Interpreter extends PlayerInterface
 		
 	}
 	
-	function doPrompt()
-	{
-		$max_hit = $this->ch->pData->max_hit;
-		$cur_hit = $this->ch->pData->cur_hit;
-		$max_ma = $this->ch->pData->max_ma;
-		$cur_ma = $this->ch->pData->cur_ma;
-		$max_mv = $this->ch->pData->max_mv;
-		$cur_mv = $this->ch->pData->cur_mv;
-		
-		$room = new Room($this->ch);
-		$room->load();
-		
-		$this->ch->send("\n\r".$this->colorize("[Health: `i$cur_hit``/`b$max_hit`` | Mana: `n$cur_ma``/`g$max_ma`` | Move: `j$cur_mv``/`c$max_mv`` ] - $room->name")." \n\r");
-	}
-	
 	function getCommands()
 	{
 		return json_decode(file_get_contents('src/db/commands.json'));

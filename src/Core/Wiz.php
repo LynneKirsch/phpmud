@@ -12,8 +12,6 @@ class Wiz extends PlayerInterface
 	
 	function loadObject($args)
 	{
-		global $clients;
-		
 		if(!is_numeric($args) || count(explode(' ', $args))>1)
 		{
 			$this->ch->send("Syntax: load_obj [object_id]");
@@ -26,7 +24,7 @@ class Wiz extends PlayerInterface
 			$this->objToChar($object, $this->ch);
 			$this->toChar($this->ch, "You have created " . $object->short . "!");
 			
-			foreach($clients as $client)
+			foreach($this->players as $client)
 			{
 				if($client != $this->ch && $client->pData->in_room == $this->ch->pData->in_room)
 				{
