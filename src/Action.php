@@ -217,7 +217,7 @@ class Action extends GameInterface
 		
 		foreach($clients as $client)
 		{
-			if($client != $this->ch && $client->pData->in_room == $this->ch->pData->in_room)
+			if($client != $this->ch && $client->pData->in_room === $this->ch->pData->in_room)
 			{
 				$this->toChar($this->ch, $client->pData->name." is here.");
 			}
