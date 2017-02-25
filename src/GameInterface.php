@@ -26,6 +26,24 @@ class GameInterface
 		unset($this->player);
 	}
 	
+	function damageToChar($ch, $dmg)
+	{
+		$hp = $ch->pData->cur_hit;
+		$new_hp = $hp - $dmg;
+
+		if($new_hp < 0)
+		{
+			$this->toChar($ch, "`bAlas, you have died!!``");
+			// to do: other death shit
+		}
+		else
+		{
+			$ch->pData->cur_hit = $new_hp;
+		}
+		
+		$ch->pData->save();
+	}
+	
 	function objFromChar($obj, $ch)
 	{
 		

@@ -4,7 +4,7 @@ $(function()
     var command_counter = -1;
     var history_counter = -1;
 
-    var conn = new WebSocket('ws://localhost:9000');
+    var conn = new WebSocket('ws://174.138.76.27:9000');
 
     conn.onopen = function(e) 
     {
