@@ -151,6 +151,8 @@ class Action extends PlayerInterface
 	
 	function doLook()
 	{
+		global $world;
+		
 		$room = new Room($this->ch);
 		$room->load($this->ch->pData->in_room);
 		$this->ch->send($room->name."\n");
@@ -188,14 +190,21 @@ class Action extends PlayerInterface
 		
 		$this->ch->send("]\n");
 		
-		
-		if(!empty($room->mobiles))
+		if(isset($world->mobs_in_rooms[$room->id]) 
+			&& is_array($world->mobs_in_rooms[$room->id]))
 		{
-			foreach($room->mobiles as $mobile)
+			foreach($world->mobs_in_rooms[$room->id] as $mob_id => $mobs)
 			{
-				$this->toChar($this->ch, "`f".$mobile->long."``");
+				foreach($mobs as $instance => $mob_id)
+				{
+					if(isset($world->mobiles[$instance]))
+					{
+						$this->toChar($this->ch, $world->mobiles[$instance]->long);
+					}
+				}
 			}
 		}
+		
 		
 		if(!empty($room->objects))
 		{

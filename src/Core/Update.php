@@ -4,16 +4,16 @@ class Update extends PlayerInterface
 	function doTick()
 	{
 		$this->savePlayerCharacters();
-		//$this->doResets();
+		$this->doResets();
 	}
 	
 	function savePlayerCharacters()
 	{
-		foreach($this->players as $client)
+		foreach($this->players as $player)
 		{
-			if(isset($client->CONN_STATE) && $client->CONN_STATE == "CONNECTED")
+			if(isset($player->CONN_STATE) && $player->CONN_STATE == "CONNECTED")
 			{
-				$client->pData->save();
+				$player->pData->save();
 			}
 		}
 	}
@@ -24,34 +24,33 @@ class Update extends PlayerInterface
 		
 		foreach($rooms as $room_file)
 		{
-			$room_obj = json_decode(file_get_contents(ROOM_DIR.$room_file->getFilename()));
+			$this->roomReset($room_file);
+		}
+	}
+	
+	function roomReset($room_file)
+	{
+		
+		$room_obj = json_decode(file_get_contents(ROOM_DIR.$room_file->getFilename()));
+		$room = new Room();
+		$room->load($room_obj->id);
+
+		foreach($room->resets->mobiles as $mob_reset)
+		{
 			
-			$room_id = $room_obj->id;
-			$room = new Room($this->ch);
-			$room->load($room_obj->id);
+
+			global $world;
+			$room_max = $mob_reset->max_in_room;
+			$area_max = $mob_reset->max_in_area;
 			
-			foreach($room->resets->mobiles as $mob_reset)
+			if($world->canMobSpawn($room_max, $area_max, $mob_reset->id, $room))
 			{
-				global $counts;
-				$do_reset = true;
-				
-				$mob_id = $mob_reset->id;
-				
-				if($counts->getMobileRoomCount($mob_id, $room_id) >= $mob_reset->max_in_room)
-				{
-					$do_reset = false;
-				}
-				
-				if($do_reset)
-				{
-					$mob = new Mobile();
-					$mob->load($mob_reset->id);
-					$room->mobiles[] = clone($mob);
-					$counts->addMob($mob_id, $room_id);
-				}
+				$mob = new Mobile();
+				$mob->load($mob_reset->id);
+				$mob->in_room = $room->id;
+				$clone = clone $mob;
+				$world->spawnMobile($clone, $room);
 			}
-			
-			$room->save();
 		}
 	}
 }

@@ -3,12 +3,6 @@ class Info extends PlayerInterface
 {
 	function doWho()
     {	
-		echo '<pre>';
-		print_r(array_keys($this->players));
-		echo '</pre>';
-		echo '<pre>';
-		print_r(array_keys($this->connecting));
-		echo '</pre>';
 		$buf = "";
 
 		$buf .= "`a:`b----------------------------------------------------------------------------`a:`` \n";

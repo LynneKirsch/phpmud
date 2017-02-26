@@ -1,5 +1,5 @@
 <?php
-class PlayerInterface extends WorldInterface
+class PlayerInterface
 {
 	public $ch;
 	

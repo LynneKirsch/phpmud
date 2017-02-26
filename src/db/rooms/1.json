@@ -68,18 +68,6 @@
     "objects": {},
     "mobiles": [],
     "resets": {
-        "objects": 
-	{
-            "5": 
-	    {
-                "id": 5,
-                "quantity": 1,
-                "where": 
-		{
-                    "in_room": 1
-                }
-            }
-        },
         "mobiles": [
 	    {
 		"id":1,
