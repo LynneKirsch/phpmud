@@ -2,6 +2,8 @@
 class WorldInterface
 {
 	// things in the world
+	public $beats = 0;
+	public $next_tick = 45;
 	public $connecting = array();
 	public $players = array();
 	public $mobiles = array();

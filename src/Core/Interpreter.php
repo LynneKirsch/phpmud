@@ -15,6 +15,11 @@ class Interpreter extends PlayerInterface
 		{
 			$this->ch->send("");
 		}
+		elseif($arg[0] === "/")
+		{
+			$communication = new Communication($this->ch);
+			$communication->doSocial(substr($arg, 1));
+		}
 		else
 		{
 			$command_string = implode(' ', $arg_array);

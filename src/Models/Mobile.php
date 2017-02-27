@@ -8,6 +8,7 @@ class Mobile extends PlayerInterface
 	public $in_room;
 	public $max_hit;
 	public $cur_hit;
+	public $script;
 	
 	function load($id)
 	{

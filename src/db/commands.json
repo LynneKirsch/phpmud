@@ -159,6 +159,21 @@
 		"class":"Magic",
 		"level":1
 	},
+	"wdump":{
+		"action":"wDump",
+		"class":"Wiz",
+		"level":1
+	},
+	"nexttick":{
+		"action":"displayNextTick",
+		"class":"Wiz",
+		"level":1
+	},
+	"emote":{
+		"action":"doEmote",
+		"class":"Communication",
+		"level":1
+	},
 	"who":{
 		"action":"doWho",
 		"class":"Info",

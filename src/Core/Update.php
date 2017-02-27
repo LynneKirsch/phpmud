@@ -1,6 +1,17 @@
 <?php
 class Update extends PlayerInterface
 {
+	function doBeat()
+	{
+		global $world;
+		
+		if($world->beats >= $world->next_tick)
+		{
+			$world->next_tick = $world->next_tick + 45;
+			$this->doTick();
+		}
+	}
+	
 	function doTick()
 	{
 		$this->savePlayerCharacters();

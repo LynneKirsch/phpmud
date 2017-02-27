@@ -1,0 +1,11 @@
+{
+    "facepalm":{
+	"to_char":"You facepalm.",
+	"to_room":"%n facepalms.",
+	"on_self_to_char":"You facepalm at your own idiocy.",
+	"on_self_to_room":"%n facepalms at %s own idiocy.",
+	"on_target_to_char":"You facepalm at %t. What an idiot.",
+	"on_target_to_room":"$n facepalms at %t.",
+	"on_target_to_target":"$n facepalms at you. What a dick."
+    }
+}

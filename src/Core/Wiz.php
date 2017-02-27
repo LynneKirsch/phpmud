@@ -72,6 +72,30 @@ class Wiz extends PlayerInterface
 		$room->save();
 	}
 	
+	function displayNextTick()
+	{
+		global $world;
+		
+		$next_tick_in = $world->next_tick - $world->beats; 
+		
+		$this->toChar($this->ch, "Next tick will happen in `n".$next_tick_in."`` seconds.");
+	}
+	
+	function wDump()
+	{
+		global $world;
+		ob_start();
+		echo '<pre>';
+		print_r($world->beats);
+		print_r($world->next_tick);
+		print_r($world->mobiles);
+		print_r($world->objects);
+		print_r($world->mobs_in_rooms);
+		print_r($world->mobs_in_areas);
+		echo '</pre>';
+		$output = ob_get_clean();
+		$this->ch->send($output);
+	}
 	function pDump()
 	{
 		ob_start();

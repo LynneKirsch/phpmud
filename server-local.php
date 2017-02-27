@@ -18,14 +18,9 @@ class Server implements MessageComponentInterface
 		$update = new Update();
 		$update->doTick();
 		
-        $loop->addPeriodicTimer(45, function() 
-        {
-            $this->doTick();
-        });
-		
         $loop->addPeriodicTimer(2, function() 
         {
-            $this->doBeat();
+            $this->doBeat();	
         });
 	}
 
@@ -81,17 +76,13 @@ class Server implements MessageComponentInterface
         $conn->close();
     }
 
-    public function doTick()
-    {
-        $update = new Update();
-		$update->doTick();
-    }
-	
-	
     public function doBeat()
     {
-		$combat = new Combat();
-		$combat->initializeBeat();
+		global $world;
+		++$world->beats;
+		
+		$update = new Update();
+		$update->doBeat();
     }
 }
 

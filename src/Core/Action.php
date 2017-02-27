@@ -199,7 +199,7 @@ class Action extends PlayerInterface
 				{
 					if(isset($world->mobiles[$instance]))
 					{
-						$this->toChar($this->ch, $world->mobiles[$instance]->long);
+						$this->toChar($this->ch, "`k*`` `f".$world->mobiles[$instance]->long."``");
 					}
 				}
 			}
