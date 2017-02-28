@@ -142,6 +142,29 @@ class PlayerInterface
 		}
 	}
 	
+	function toRoom($room_id, $msg)
+	{
+		global $world;
+		
+		foreach($world->players as $player)
+		{
+			if($player->pData->in_room === $room_id)
+			{
+				$this->toChar($player, $msg);
+			}
+		}
+	}
+	
+	function toGlobal($msg)
+	{
+		global $world;
+		
+		foreach($world->players as $player)
+		{
+			$this->toChar($player, $msg);
+		}
+	}
+	
 	function doPrompt()
 	{
 		$max_hit = $this->player->max_hit;

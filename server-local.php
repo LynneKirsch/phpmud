@@ -18,7 +18,7 @@ class Server implements MessageComponentInterface
 		$update = new Update();
 		$update->doTick();
 		
-        $loop->addPeriodicTimer(2, function() 
+        $loop->addPeriodicTimer(1, function() 
         {
             $this->doBeat();	
         });
@@ -81,8 +81,36 @@ class Server implements MessageComponentInterface
 		global $world;
 		++$world->beats;
 		
-		$update = new Update();
-		$update->doBeat();
+		foreach($world->process_queue as $trigger_beat => $process_array)
+		{
+			// if the beat # that the function should fire on is less than,
+			// or equal to the current beat, fire the function.
+			if($trigger_beat <= $world->beats)
+			{
+				foreach($process_array as $process)
+				{
+					$class = new $process->class();
+					call_user_func_array(array($class, $process->function), $process->params);
+				}
+						
+				// remove it from the queue
+				unset($world->process_queue[$trigger_beat]);
+			}
+			// else, the beat # the function should fire on is greater than the current beat, 
+			// so break out of the loop.
+			else
+			{
+				break;
+			}
+		}
+		
+		print_r(array_keys($world->process_queue));
+		
+		if($world->beats % 2 === 0)
+		{
+			$update = new Update();
+			$update->doBeat();
+		}
     }
 }
 

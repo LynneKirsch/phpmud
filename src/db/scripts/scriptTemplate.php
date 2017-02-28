@@ -31,13 +31,14 @@ class MobileScript_MOBID extends PlayerInterface
 		
 		if($triggered)
 		{
-			foreach($world->players as $player)
-			{
-				if($player->pData->in_room === $this->mobile->in_room)
-				{
-					$this->toChar($player, $this->mobile->short . " says '`kOh, hello!``'");
-				}
-			}
+			$process_array = array(
+				'trigger_beat' => $world->beats + 2,
+				'function' => 'toRoom',
+				'class' => 'PlayerInterface',
+				'params' => array($this->mobile->in_room, $this->mobile->short . " says '`kOh, hello!``'")
+			);
+
+			$world->createProcessObject($process_array);
 		}
 	}
 }
