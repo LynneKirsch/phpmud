@@ -14,6 +14,7 @@ class WorldInterface
 		'mobiles' => array(),
 		'players' => array()
 	);
+	public $process_queue;
 	
 	public $process_queue = array();
 	
