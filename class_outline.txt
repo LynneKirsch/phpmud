@@ -1,9 +1,0 @@
-Char Max Levels: 						50
-1st Talent Skill/Spell: 				30
-Total talent skill/spells per player: 	5 
-Total talent skill/spells per class: 	15
-Talent skills/spells offered per tier: 	3 
-Talents per spell: 						2
-Total talents per class: 				30
-Total talent options per player: 		10
-Allowed talents per player:				7
